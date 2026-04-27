@@ -478,6 +478,21 @@ li + li { margin-top: var(--list-gap); }
   box-shadow: 0 1px 4px rgba(0,0,0,0.12);
 }
 
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 28px;
+  padding: 0;
+}
+
+.download-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
 .lang-dropdown {
   position: relative;
 }
@@ -737,6 +752,11 @@ li + li { margin-top: var(--list-gap); }
   .download-btn {
     padding: 3px 8px;
     font-size: 11px;
+  }
+  .download-btn {
+    width: 28px;
+    height: 26px;
+    padding: 0;
   }
 }
 

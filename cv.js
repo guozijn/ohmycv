@@ -187,7 +187,8 @@ function renderCv(dict) {
   setHTML('name', dict.profile?.name);
   const downloadBtn = document.querySelector('.download-btn');
   if (downloadBtn && dict.site?.download_label) {
-    downloadBtn.textContent = dict.site.download_label;
+    downloadBtn.setAttribute('aria-label', dict.site.download_label);
+    downloadBtn.setAttribute('title', dict.site.download_label);
   }
   const contact = document.getElementById('contact-info');
   if (contact) {
