@@ -63,9 +63,11 @@ Configuration is merged in this order:
 
 ```text
 i18n/<lang>.json
+> shared/global fields from config/cv.json
+> shared language fields from config/cv.json languages.<lang>
 > selected job override
-> shared/global fields from config/cv.json and config/local.json
-> language fields from config/cv.json languages.<lang> and config/local.json languages.<lang>
+> private/global fields from config/local.json
+> private language fields from config/local.json languages.<lang>
 ```
 
 Job selection priority:

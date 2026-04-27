@@ -16,18 +16,19 @@ async function loadLang(lang) {
   const dict = await res.json();
   const config = await loadCvConfig();
   const jobOverrides = await loadJobOverrides(config, lang);
-  return applyLocalOverrides(mergeCvData(dict, jobOverrides), config, lang);
+  const sharedOverrides = applyConfigOverrides(dict, config.shared, lang);
+  return applyConfigOverrides(mergeCvData(sharedOverrides, jobOverrides), config.local, lang);
 }
 
 async function loadCvConfig() {
   const shared = await fetchJson('config/cv.json');
   const local = await fetchJson('config/local.json');
-  return mergeCvData(shared || {}, local);
+  return { shared: shared || {}, local };
 }
 
-function applyLocalOverrides(dict, local, lang) {
-  if (!local) return dict;
-  const { languages, active_job, cv_job, job, ...globalOverrides } = local;
+function applyConfigOverrides(dict, config, lang) {
+  if (!config) return dict;
+  const { languages, active_job, cv_job, job, ...globalOverrides } = config;
   const langOverrides = languages?.[lang] || {};
   return mergeCvData(mergeCvData(dict, globalOverrides), langOverrides);
 }
@@ -49,21 +50,24 @@ function mergeCvData(base, overrides) {
   return merged;
 }
 
-function getSelectedJobName(local) {
+function getSelectedJobName(config) {
   const params = new URLSearchParams(window.location.search);
   return (
     params.get('job') ||
     window.CV_JOB ||
     document.body?.dataset?.job ||
-    local?.active_job ||
-    local?.cv_job ||
-    local?.job ||
+    config.local?.active_job ||
+    config.local?.cv_job ||
+    config.local?.job ||
+    config.shared?.active_job ||
+    config.shared?.cv_job ||
+    config.shared?.job ||
     ''
   ).trim();
 }
 
-async function loadJobOverrides(local, lang) {
-  const jobName = getSelectedJobName(local);
+async function loadJobOverrides(config, lang) {
+  const jobName = getSelectedJobName(config);
   if (!jobName) return null;
   if (!/^[a-z0-9_-]+$/i.test(jobName)) {
     console.warn(`Ignoring invalid CV job name: ${jobName}`);
