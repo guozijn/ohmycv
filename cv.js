@@ -104,7 +104,7 @@ async function fetchFirstJson(paths) {
 async function fetchJson(path) {
   try {
     const res = await fetch(withBasePath(path), { cache: 'no-store' });
-    if (res.ok) return res.json();
+    if (res.ok) return await res.json();
   } catch {
     return null;
   }
