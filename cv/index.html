@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="title"></title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040a07'/%3E%3Cpath d='M18 22l12 10-12 10' stroke='%235cff9b' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M36 43h10' stroke='%235cff9b' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-base-path="..">
+  <div id="loader" class="loader" role="status" aria-live="polite">
+    <div class="loader-terminal" aria-hidden="true">
+      <span class="loader-logo">
+        <span class="loader-logo-arrow">&gt;</span>
+        <span class="loader-logo-line"></span>
+      </span>
+      <span id="loader-text" class="loader-text">Loading</span>
+    </div>
+  </div>
+  <div class="page cv-page">
+    <div class="header">
+      <div class="name" id="name"></div>
+      <div class="contact-info" id="contact-info"></div>
+    </div>
+
+    <div class="content">
+      <p id="profile-summary" class="profile-summary"></p>
+
+      <div class="section-title" id="education-title"></div>
+      <div id="education-list"></div>
+
+      <div class="section-title" id="skills-title"></div>
+      <ul id="skills-list"></ul>
+
+      <div class="section-title" id="experience-title"></div>
+      <div id="experience-list"></div>
+
+      <div class="section-title" id="open-source-title"></div>
+      <div class="institution" id="open-source-custom"></div>
+      <ul id="open-source-custom-projects"></ul>
+
+      <div class="section-title" id="patents-title"></div>
+      <ul id="patents-list"></ul>
+
+      <div class="section-title" id="open-source-community-title"></div>
+      <div class="institution" id="open-source-community-wrap"></div>
+      <ul id="open-source-projects"></ul>
+
+      <div class="section-title" id="awards-title"></div>
+      <ul id="awards-list"></ul>
+
+      <div class="section-title" id="cert-title"></div>
+      <ul id="cert-list"></ul>
+
+      <div id="referee-section" class="referee-section" hidden>
+        <div class="section-title" id="referee-title"></div>
+        <div id="referee-list"></div>
+        <div class="micro-note" id="referee-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="lang-dropdown" id="lang-dropdown">
+      <button class="cv-btn lang-switch-btn" id="lang-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+        <span id="lang-label">EN</span> ▾
+      </button>
+      <ul class="lang-menu" role="listbox" id="lang-menu">
+        <li role="option" data-lang="en">English</li>
+        <li role="option" data-lang="zh">中文</li>
+      </ul>
+    </div>
+    <button onclick="window.print()" class="cv-btn download-btn">Download PDF</button>
+  </div>
+
+  <script src="../cv.js"></script>
+</body>
+</html>

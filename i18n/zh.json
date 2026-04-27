@@ -1,0 +1,152 @@
+{
+  "site": {
+    "title": "陈安",
+    "print_filename": "Alex-Chen-CV",
+    "download_label": "下载 PDF"
+  },
+  "homepage": {
+    "title": "Alex Chen",
+    "prompt": "alex@ohmycv:~$",
+    "greeting": "输入 {help} 查看命令，或直接打开 {cv}、{github}、{linkedin}。",
+    "links": [
+      {
+        "label": "作品集",
+        "command": "portfolio",
+        "url": "https://alexchen.dev",
+        "text": "alexchen.dev"
+      }
+    ]
+  },
+  "profile": {
+    "name": "陈安",
+    "contact_info": {
+      "地址": "澳大利亚，墨尔本",
+      "邮箱": "alex.chen@example.com",
+      "博客": "alexchen.dev/blog",
+      "Github": "github.com/alexchen-demo",
+      "LinkedIn": "linkedin.com/in/alexchen-demo"
+    },
+    "summary": "注重产品体验的软件工程师，具备多语言 Web 产品、数据流程和云原生服务开发经验。能够在前端界面、后端 API、自动化与开发者工具之间切换，关注可靠系统、清晰 UX，以及 AI 辅助软件开发的实用落地。"
+  },
+  "education": {
+    "title": "教育背景",
+    "entries": [
+      {
+        "name": "南十字信息技术学院",
+        "dates": "2022年2月 - 2023年12月",
+        "degree": "信息技术硕士",
+        "note": "课程方向：分布式系统、人机交互与数据工程。"
+      },
+      {
+        "name": "海港城市大学",
+        "dates": "2016年9月 - 2020年6月",
+        "degree": "软件工程学士"
+      }
+    ]
+  },
+  "skills": {
+    "title": "技能",
+    "items": [
+      { "label": "前端", "value": "JavaScript, TypeScript, React, Vite, HTML, CSS, 可访问性，响应式设计" },
+      { "label": "后端", "value": "Node.js, Python, REST API, PostgreSQL, Redis, 后台任务" },
+      { "label": "云与 DevOps", "value": "Docker, GitHub Actions, Linux, Nginx, AWS, 基础可观测性" },
+      { "label": "AI 工具", "value": "Prompt 工作流，评测脚本，文档处理，编程助手" },
+      { "label": "语言", "value": "英语，中文" }
+    ]
+  },
+  "experience": {
+    "title": "工作经历",
+    "jobs": [
+      {
+        "company": "Northstar Labs",
+        "location": "澳大利亚，墨尔本",
+        "dates": "2024年1月 - 至今",
+        "title": "软件工程师",
+        "responsibilities": [
+          "使用 React 与 TypeScript 构建面向客户的仪表盘，优化支持与运营团队的任务处理流程。",
+          "设计账号流程、通知与用量报表相关的 REST API 和后台任务。",
+          "引入结构化日志与部署检查，减少排查发布问题所需时间。",
+          "与产品和设计同事协作，将模糊的流程问题拆解为可验证的迭代。"
+        ]
+      },
+      {
+        "company": "PaperTrail Analytics",
+        "location": "远程",
+        "dates": "2021年7月 - 2023年12月",
+        "title": "全栈开发工程师",
+        "responsibilities": [
+          "实现用于 PDF、表格与表单数据的文档摄取流程，支持内部审核团队工作。",
+          "创建可复用的搜索、筛选、批量操作和审计视图组件。",
+          "自动化常规数据质量检查，并为业务方生成运营报表。",
+          "维护 CI 工作流，并围绕关键解析与导出行为补充测试覆盖。"
+        ]
+      },
+      {
+        "company": "BrightPath Digital",
+        "location": "澳大利亚，悉尼",
+        "dates": "2020年8月 - 2021年6月",
+        "title": "初级开发工程师",
+        "responsibilities": [
+          "使用现代 JavaScript 与服务端模板交付响应式网站和小型业务应用。",
+          "集成支付、邮件和分析等第三方服务，并保持清晰的配置边界。",
+          "编写安装和交接文档，帮助非技术客户安全维护内容。"
+        ]
+      }
+    ]
+  },
+  "open_source": {
+    "title": "项目",
+    "custom": "代表作品",
+    "custom_projects": [
+      { "title": "OhMyCV", "desc": "基于 JSON 配置的静态多语言简历渲染器，支持岗位定制与适合打印的输出。" },
+      { "title": "Dataset QA Toolkit", "desc": "用于校验 CSV schema、抽样记录并生成审核摘要的小型命令行工具。" },
+      { "title": "Support Macro Library", "desc": "可复用模板与脚本，帮助支持团队标准化常见客户回复。" }
+    ],
+    "community_title": "开源贡献",
+    "community": {
+      "name": "社区贡献",
+      "dates": "2021年 - 至今"
+    },
+    "projects": [
+      { "title": "文档改进", "desc": "为开发者工具项目改进安装说明、示例和 issue 模板。" },
+      { "title": "问题修复", "desc": "围绕可访问性、配置加载与测试稳定性贡献小型修复。" }
+    ]
+  },
+  "certifications": {
+    "title": "认证",
+    "items": [
+      {
+        "type": "certificate",
+        "name": "Cloud Practitioner Certificate（2024）",
+        "desc": "云架构、安全与运维基础。"
+      },
+      {
+        "type": "certificate",
+        "name": "Professional Scrum Foundations（2023）",
+        "desc": ""
+      }
+    ]
+  },
+  "patents": {
+    "title": "发表与写作",
+    "items": [
+      {
+        "type": "label_text",
+        "label": "文章",
+        "text": "Designing maintainable configuration for static personal sites, Engineering Notes, 2024."
+      }
+    ]
+  },
+  "awards": {
+    "title": "荣誉",
+    "items": [
+      { "type": "text", "text": "Northstar Labs Engineering Impact Award（2025）" },
+      { "type": "text", "text": "海港城市大学院长名单（2020）" }
+    ]
+  },
+  "referees": {
+    "title": "推荐人",
+    "note": "可按需提供。",
+    "items": []
+  }
+}

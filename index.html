@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OhMyCV</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040a07'/%3E%3Cpath d='M18 22l12 10-12 10' stroke='%235cff9b' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M36 43h10' stroke='%235cff9b' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body data-base-path=".">
+  <div id="loader" class="loader" role="status" aria-live="polite">
+    <div class="loader-terminal" aria-hidden="true">
+      <span class="loader-logo">
+        <span class="loader-logo-arrow">&gt;</span>
+        <span class="loader-logo-line"></span>
+      </span>
+      <span id="loader-text" class="loader-text">Loading</span>
+    </div>
+  </div>
+
+  <main class="terminal-shell">
+    <section class="terminal-window" aria-label="Terminal Home">
+      <div class="terminal-chrome">
+        <div class="terminal-dots" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="terminal-body">
+        <div class="terminal-output" id="terminal-output" aria-live="polite"></div>
+
+        <form class="terminal-input-row" id="terminal-form" autocomplete="off">
+          <label class="terminal-prompt" for="terminal-input" id="terminal-prompt">$</label>
+          <input
+            id="terminal-input"
+            class="terminal-input"
+            name="command"
+            type="text"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            aria-label="Terminal command"
+          />
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="./home.js"></script>
+</body>
+</html>

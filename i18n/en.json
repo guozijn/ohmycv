@@ -1,0 +1,152 @@
+{
+  "site": {
+    "title": "Alex Chen",
+    "print_filename": "Alex-Chen-CV",
+    "download_label": "Download PDF"
+  },
+  "homepage": {
+    "title": "Alex Chen",
+    "prompt": "alex@ohmycv:~$",
+    "greeting": "Type {help} to see commands, or jump straight to {cv}, {github}, or {linkedin}.",
+    "links": [
+      {
+        "label": "Portfolio",
+        "command": "portfolio",
+        "url": "https://alexchen.dev",
+        "text": "alexchen.dev"
+      }
+    ]
+  },
+  "profile": {
+    "name": "Alex Chen",
+    "contact_info": {
+      "Address": "Melbourne, Australia",
+      "Email": "alex.chen@example.com",
+      "Blog": "alexchen.dev/blog",
+      "Github": "github.com/alexchen-demo",
+      "LinkedIn": "linkedin.com/in/alexchen-demo"
+    },
+    "summary": "Product-minded software engineer with experience building multilingual web products, data workflows, and cloud-native services. Comfortable moving between frontend interfaces, backend APIs, automation, and developer tooling. Interested in reliable systems, thoughtful UX, and practical applications of AI-assisted software development."
+  },
+  "education": {
+    "title": "EDUCATION",
+    "entries": [
+      {
+        "name": "Southern Cross Institute of Technology",
+        "dates": "Feb 2022 - Dec 2023",
+        "degree": "Master of Information Technology",
+        "note": "Coursework focus: distributed systems, human-computer interaction, and data engineering."
+      },
+      {
+        "name": "Harbour City University",
+        "dates": "Sep 2016 - Jun 2020",
+        "degree": "Bachelor of Software Engineering"
+      }
+    ]
+  },
+  "skills": {
+    "title": "SKILLS",
+    "items": [
+      { "label": "Frontend", "value": "JavaScript, TypeScript, React, Vite, HTML, CSS, accessibility, responsive design" },
+      { "label": "Backend", "value": "Node.js, Python, REST APIs, PostgreSQL, Redis, background jobs" },
+      { "label": "Cloud & DevOps", "value": "Docker, GitHub Actions, Linux, Nginx, AWS, observability basics" },
+      { "label": "AI Tooling", "value": "Prompt workflows, evaluation scripts, document processing, coding assistants" },
+      { "label": "Languages", "value": "English, Mandarin" }
+    ]
+  },
+  "experience": {
+    "title": "EXPERIENCE",
+    "jobs": [
+      {
+        "company": "Northstar Labs",
+        "location": "Melbourne, Australia",
+        "dates": "Jan 2024 - Present",
+        "title": "Software Engineer",
+        "responsibilities": [
+          "Built customer-facing dashboards with React and TypeScript, improving task completion flows for support and operations teams.",
+          "Designed REST API endpoints and background workers for account workflows, notifications, and usage reporting.",
+          "Introduced structured logging and deployment checks that reduced time spent diagnosing release issues.",
+          "Collaborated with product and design partners to turn ambiguous workflow problems into scoped, testable iterations."
+        ]
+      },
+      {
+        "company": "PaperTrail Analytics",
+        "location": "Remote",
+        "dates": "Jul 2021 - Dec 2023",
+        "title": "Full-stack Developer",
+        "responsibilities": [
+          "Implemented document ingestion pipelines for PDF, spreadsheet, and form data used by internal review teams.",
+          "Created reusable UI components for search, filtering, bulk actions, and audit views.",
+          "Automated recurring data quality checks and generated operational reports for stakeholders.",
+          "Maintained CI workflows and improved test coverage around critical parsing and export behavior."
+        ]
+      },
+      {
+        "company": "BrightPath Digital",
+        "location": "Sydney, Australia",
+        "dates": "Aug 2020 - Jun 2021",
+        "title": "Junior Developer",
+        "responsibilities": [
+          "Delivered responsive websites and small business applications using modern JavaScript and server-rendered templates.",
+          "Integrated third-party payment, email, and analytics services with clear configuration boundaries.",
+          "Documented setup steps and handover notes so non-specialist clients could maintain their content safely."
+        ]
+      }
+    ]
+  },
+  "open_source": {
+    "title": "PROJECTS",
+    "custom": "Selected work",
+    "custom_projects": [
+      { "title": "OhMyCV", "desc": "A static, multilingual CV renderer driven by JSON configuration, with job-specific overrides and print-friendly output." },
+      { "title": "Dataset QA Toolkit", "desc": "A small command-line toolkit for validating CSV schemas, sampling records, and producing review summaries." },
+      { "title": "Support Macro Library", "desc": "Reusable templates and scripts that helped a support team standardize common customer responses." }
+    ],
+    "community_title": "OPEN SOURCE",
+    "community": {
+      "name": "Community Contributions",
+      "dates": "2021 - Present"
+    },
+    "projects": [
+      { "title": "Docs Improvements", "desc": "Improved installation guides, examples, and issue templates for developer tooling projects." },
+      { "title": "Bug Fixes", "desc": "Contributed small fixes around accessibility, configuration loading, and test reliability." }
+    ]
+  },
+  "certifications": {
+    "title": "CERTIFICATIONS",
+    "items": [
+      {
+        "type": "certificate",
+        "name": "Cloud Practitioner Certificate (2024)",
+        "desc": "Foundational cloud architecture, security, and operations concepts."
+      },
+      {
+        "type": "certificate",
+        "name": "Professional Scrum Foundations (2023)",
+        "desc": ""
+      }
+    ]
+  },
+  "patents": {
+    "title": "PUBLICATIONS",
+    "items": [
+      {
+        "type": "label_text",
+        "label": "Article",
+        "text": "Designing maintainable configuration for static personal sites, Engineering Notes, 2024."
+      }
+    ]
+  },
+  "awards": {
+    "title": "HONORS",
+    "items": [
+      { "type": "text", "text": "Northstar Labs Engineering Impact Award (2025)" },
+      { "type": "text", "text": "Harbour City University Dean's List (2020)" }
+    ]
+  },
+  "referees": {
+    "title": "REFEREES",
+    "note": "Available on request.",
+    "items": []
+  }
+}

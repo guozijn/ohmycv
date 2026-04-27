@@ -1,0 +1,47 @@
+{
+  "active_job": "software-engineer",
+  "languages": {
+    "en": {
+      "site": {
+        "title": "Your Name",
+        "print_filename": "Your-Name-CV",
+        "download_label": "Download PDF"
+      },
+      "homepage": {
+        "title": "Your Name",
+        "prompt": "you@ohmycv:~$"
+      },
+      "profile": {
+        "name": "Your Name",
+        "contact_info": {
+          "Address": "Your City",
+          "Phone": "+1 000 000 0000",
+          "Email": "you@example.com",
+          "Github": "github.com/yourname",
+          "LinkedIn": "linkedin.com/in/yourname"
+        }
+      }
+    },
+    "zh": {
+      "site": {
+        "title": "你的名字",
+        "print_filename": "Your-Name-CV",
+        "download_label": "下载 PDF"
+      },
+      "homepage": {
+        "title": "Your Name",
+        "prompt": "you@ohmycv:~$"
+      },
+      "profile": {
+        "name": "你的名字",
+        "contact_info": {
+          "地址": "你的城市",
+          "电话": "+1 000 000 0000",
+          "邮箱": "you@example.com",
+          "Github": "github.com/yourname",
+          "LinkedIn": "linkedin.com/in/yourname"
+        }
+      }
+    }
+  }
+}

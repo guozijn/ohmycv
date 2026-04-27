@@ -1,0 +1,38 @@
+{
+  "languages": {
+    "en": {
+      "site": {
+        "print_filename": "Alex-Chen-Software-Engineer-CV"
+      },
+      "profile": {
+        "summary": "Software engineer focused on full-stack product development, data workflows, and reliable delivery. Experienced in React, Node.js, Python, cloud deployment, automation, and cross-functional product work."
+      },
+      "skills": {
+        "title": "SOFTWARE ENGINEERING SKILLS",
+        "items": [
+          { "label": "Product Engineering", "value": "React, TypeScript, component systems, accessibility, workflow design" },
+          { "label": "Backend Systems", "value": "Node.js, Python, REST APIs, PostgreSQL, Redis, asynchronous jobs" },
+          { "label": "Delivery", "value": "Docker, GitHub Actions, CI checks, release documentation, monitoring" },
+          { "label": "Collaboration", "value": "Technical writing, requirements discovery, design reviews, stakeholder demos" }
+        ]
+      }
+    },
+    "zh": {
+      "site": {
+        "print_filename": "Alex-Chen-Software-Engineer-CV"
+      },
+      "profile": {
+        "summary": "专注全栈产品开发、数据流程与可靠交付的软件工程师。具备 React、Node.js、Python、云部署、自动化和跨职能产品协作经验。"
+      },
+      "skills": {
+        "title": "软件工程技能",
+        "items": [
+          { "label": "产品工程", "value": "React, TypeScript, 组件系统，可访问性，工作流设计" },
+          { "label": "后端系统", "value": "Node.js, Python, REST API, PostgreSQL, Redis, 异步任务" },
+          { "label": "交付", "value": "Docker, GitHub Actions, CI 检查，发布文档，监控" },
+          { "label": "协作", "value": "技术写作，需求澄清，设计评审，干系人演示" }
+        ]
+      }
+    }
+  }
+}
