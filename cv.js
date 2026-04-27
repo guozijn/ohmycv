@@ -144,7 +144,7 @@ function renderTypedItems(id, items, colon) {
     const li = document.createElement('li');
     if (item.type === 'certificate') {
       li.innerHTML = `
-        ${strong(item.name, '')}
+        ${item.name || ''}
         ${item.id ? `<span class="small-text credential-id">${item.id}</span>` : ''}
         ${item.desc ? `<div class="credential-desc small-text">${item.desc}</div>` : ''}
       `;
