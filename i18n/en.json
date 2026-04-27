@@ -12,8 +12,8 @@
       {
         "label": "Portfolio",
         "command": "portfolio",
-        "url": "https://alexchen.dev",
-        "text": "alexchen.dev"
+        "url": "https://example.com",
+        "text": "example.com"
       }
     ]
   },
@@ -22,7 +22,7 @@
     "contact_info": {
       "Address": "Melbourne, Australia",
       "Email": "alex.chen@example.com",
-      "Blog": "alexchen.dev/blog",
+      "Blog": "example.com/blog",
       "Github": "github.com/alexchen-demo",
       "LinkedIn": "linkedin.com/in/alexchen-demo"
     },

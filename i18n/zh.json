@@ -12,8 +12,8 @@
       {
         "label": "作品集",
         "command": "portfolio",
-        "url": "https://alexchen.dev",
-        "text": "alexchen.dev"
+        "url": "https://example.com",
+        "text": "example.com"
       }
     ]
   },
@@ -22,7 +22,7 @@
     "contact_info": {
       "地址": "澳大利亚，墨尔本",
       "邮箱": "alex.chen@example.com",
-      "博客": "alexchen.dev/blog",
+      "博客": "example.com/blog",
       "Github": "github.com/alexchen-demo",
       "LinkedIn": "linkedin.com/in/alexchen-demo"
     },
