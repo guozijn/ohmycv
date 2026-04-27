@@ -30,6 +30,28 @@ http://localhost:4173/cv/
 
 The language JSON files are the main schema. You can customize names, contact fields, homepage title and prompt, section titles, education, skills, jobs, projects, certifications, publications, awards, referees, download button text, and print filename.
 
+If you want to keep the shipped `i18n/*.json` sample CV untouched, put public shared overrides in `config/cv.json` instead. Use top-level fields for language-independent values, or `languages.<lang>` for language-specific content. Use `config/local.json` only for private machine-local data that should not be committed.
+
+Example `config/cv.json`:
+
+```json
+{
+  "active_job": "software-engineer",
+  "languages": {
+    "en": {
+      "profile": {
+        "name": "Your Name"
+      }
+    },
+    "zh": {
+      "profile": {
+        "name": "你的名字"
+      }
+    }
+  }
+}
+```
+
 ## Override order
 
 Configuration is merged in this order:
@@ -37,8 +59,8 @@ Configuration is merged in this order:
 ```text
 i18n/<lang>.json
 > selected job override
-> global fields from config/local.json
-> config/local.json languages.<lang>
+> shared/global fields from config/cv.json and config/local.json
+> language fields from config/cv.json languages.<lang> and config/local.json languages.<lang>
 ```
 
 Job selection priority:
