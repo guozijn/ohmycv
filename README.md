@@ -95,6 +95,13 @@ node scripts/set-cv-job.mjs software-engineer
 CV_JOB=software-engineer node scripts/set-cv-job.mjs
 ```
 
+To copy a `config/` directory from another checkout or private folder into this repository:
+
+```bash
+node scripts/copy-config.mjs ../my-private-cv
+node scripts/copy-config.mjs ../my-private-cv/config --dry-run
+```
+
 For a one-off preview:
 
 ```text
