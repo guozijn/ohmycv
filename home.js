@@ -26,19 +26,27 @@ function toAbsoluteUrl(value) {
 
 async function loadLang(lang) {
   const path = withBasePath(`i18n/${lang}.json`);
-  const res = await fetch(path, { cache: 'no-store' });
+  const [res, config] = await Promise.all([
+    fetch(path, { cache: 'no-store' }),
+    loadCvConfig()
+  ]);
   if (!res.ok) throw new Error(`Failed to load ${path}`);
   const dict = await res.json();
-  const config = await loadCvConfig();
   const jobOverrides = await loadJobOverrides(config, lang);
   const sharedOverrides = applyConfigOverrides(dict, config.shared, lang);
   return applyConfigOverrides(mergeCvData(sharedOverrides, jobOverrides), config.local, lang);
 }
 
+let _cvConfigPromise = null;
+
 async function loadCvConfig() {
-  const shared = await fetchJson('config/cv.json');
-  const local = await fetchJson('config/local.json');
-  return { shared: shared || {}, local };
+  if (!_cvConfigPromise) {
+    _cvConfigPromise = Promise.all([
+      fetchJson('config/cv.json'),
+      fetchJson('config/local.json')
+    ]).then(([shared, local]) => ({ shared: shared || {}, local }));
+  }
+  return _cvConfigPromise;
 }
 
 function applyConfigOverrides(dict, config, lang) {
@@ -682,8 +690,9 @@ function renderHome(dict) {
 async function loadHome() {
   setLoading(true);
   try {
-    const config = await loadCvConfig();
-    injectGoogleAnalytics(config.local?.google_analytics_id || config.shared?.google_analytics_id);
+    loadCvConfig().then(config => {
+      injectGoogleAnalytics(config.local?.google_analytics_id || config.shared?.google_analytics_id);
+    });
     const dict = await loadLang('en');
     renderHome(dict);
   } catch (err) {

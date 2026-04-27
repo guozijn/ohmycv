@@ -11,19 +11,27 @@ function withBasePath(path) {
 
 async function loadLang(lang) {
   const path = withBasePath(`i18n/${lang}.json`);
-  const res = await fetch(path, { cache: 'no-store' });
+  const [res, config] = await Promise.all([
+    fetch(path, { cache: 'no-store' }),
+    loadCvConfig()
+  ]);
   if (!res.ok) throw new Error(`Failed to load ${path}`);
   const dict = await res.json();
-  const config = await loadCvConfig();
   const jobOverrides = await loadJobOverrides(config, lang);
   const sharedOverrides = applyConfigOverrides(dict, config.shared, lang);
   return applyConfigOverrides(mergeCvData(sharedOverrides, jobOverrides), config.local, lang);
 }
 
+let _cvConfigPromise = null;
+
 async function loadCvConfig() {
-  const shared = await fetchJson('config/cv.json');
-  const local = await fetchJson('config/local.json');
-  return { shared: shared || {}, local };
+  if (!_cvConfigPromise) {
+    _cvConfigPromise = Promise.all([
+      fetchJson('config/cv.json'),
+      fetchJson('config/local.json')
+    ]).then(([shared, local]) => ({ shared: shared || {}, local }));
+  }
+  return _cvConfigPromise;
 }
 
 function applyConfigOverrides(dict, config, lang) {
