@@ -117,6 +117,11 @@ function contactHref(key, value) {
   return '';
 }
 
+function shouldShowCvContact(key, profile) {
+  const hidden = profile?.cv_hidden_contact_fields || [];
+  return !hidden.includes(key);
+}
+
 function renderList(id, items) {
   const el = document.getElementById(id);
   el.innerHTML = '';
@@ -183,11 +188,13 @@ function renderCv(dict) {
   const contact = document.getElementById('contact-info');
   if (contact) {
     contact.innerHTML = '';
-    const contactInfo = dict.profile?.contact_info || {};
+    const profile = dict.profile || {};
+    const contactInfo = profile.contact_info || {};
     const contactOrder = isZH
       ? ['地址', '电话', '邮箱', '博客', 'Github', 'LinkedIn']
       : ['Address', 'Phone', 'Email', 'Blog', 'Github', 'LinkedIn'];
     const entries = Object.entries(contactInfo)
+      .filter(([key]) => shouldShowCvContact(key, profile))
       .sort(([a], [b]) => {
       const ai = contactOrder.indexOf(a);
       const bi = contactOrder.indexOf(b);

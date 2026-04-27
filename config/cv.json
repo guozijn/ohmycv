@@ -1,3 +1,6 @@
 {
-  "active_job": "software-engineer"
+  "active_job": "software-engineer",
+  "profile": {
+    "cv_hidden_contact_fields": ["Blog", "博客", "Github", "GitHub", "LinkedIn"]
+  }
 }

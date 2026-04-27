@@ -37,6 +37,9 @@ Example `config/cv.json`:
 ```json
 {
   "active_job": "software-engineer",
+  "profile": {
+    "cv_hidden_contact_fields": ["Blog", "Github", "LinkedIn"]
+  },
   "languages": {
     "en": {
       "profile": {
@@ -51,6 +54,8 @@ Example `config/cv.json`:
   }
 }
 ```
+
+`profile.cv_hidden_contact_fields` hides contact fields only on the CV page. The homepage can still read the same `profile.contact_info` values to build terminal commands and quick links.
 
 ## Override order
 
