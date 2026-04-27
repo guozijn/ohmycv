@@ -118,6 +118,17 @@ async function fetchJson(path) {
   return null;
 }
 
+function injectGoogleAnalytics(id) {
+  if (!id || !/^G-[A-Z0-9]+$/i.test(id)) return;
+  const s1 = document.createElement('script');
+  s1.async = true;
+  s1.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+  document.head.appendChild(s1);
+  const s2 = document.createElement('script');
+  s2.textContent = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${id}');`;
+  document.head.appendChild(s2);
+}
+
 function setLoading(isLoading) {
   const loader = document.getElementById('loader');
   if (!loader) return;
@@ -671,6 +682,8 @@ function renderHome(dict) {
 async function loadHome() {
   setLoading(true);
   try {
+    const config = await loadCvConfig();
+    injectGoogleAnalytics(config.local?.google_analytics_id || config.shared?.google_analytics_id);
     const dict = await loadLang('en');
     renderHome(dict);
   } catch (err) {

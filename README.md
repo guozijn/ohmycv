@@ -108,6 +108,18 @@ For a one-off preview:
 http://localhost:4173/cv/?job=software-engineer
 ```
 
+## Google Analytics
+
+Set `google_analytics_id` to a GA4 measurement ID in `config/cv.json` or `config/local.json`:
+
+```json
+{
+  "google_analytics_id": "G-XXXXXXXXXX"
+}
+```
+
+Both the homepage and the CV page will inject the gtag script automatically. If the field is absent or empty, no tracking code is added.
+
 ## Deploy
 
 Deploy the directory as a static site. No build step is required.
