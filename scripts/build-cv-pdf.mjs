@@ -269,7 +269,7 @@ function contactHref(key, value) {
 function renderEducation(section = {}) {
   const rows = (section.entries || []).map(entry => {
     const desc = list(entry.description || []);
-    return String.raw`\textbf{${text(entry.name)}}${entry.dates ? String.raw`\cvdates{${text(entry.dates)}}` : ''}\\
+    return String.raw`\textbf{${text(entry.name)}}${entry.dates ? String.raw`\cvdates{${dateText(entry.dates)}}` : ''}\\
 ${entry.degree ? String.raw`\textit{${text(entry.degree)}}\\` : ''}
 ${entry.note ? `${text(entry.note)}\\\\` : ''}
 ${desc}`;
@@ -290,7 +290,7 @@ function renderExperience(section = {}) {
   const jobs = (section.jobs || []).map(job => {
     const items = list(job.responsibilities || []);
     const location = job.location ? text(job.location) : '';
-    return String.raw`\entryhead{${text(job.company)}}{${location}}{${text(htmlToPlain(job.dates || ''))}}
+    return String.raw`\entryhead{${text(job.company)}}{${location}}{${dateText(job.dates || '')}}
 \textit{${text(job.title || '')}}\\[-2pt]
 ${items}`;
   }).join('\n');
@@ -316,7 +316,7 @@ function renderCommunity(section = {}) {
   ).join('\n');
   if (!section.community_title || (!community.name && !projects)) return '';
   return String.raw`\section*{${text(section.community_title)}}
-${community.name ? String.raw`\textbf{${text(community.name)}}${community.dates ? String.raw`\cvdates{${text(community.dates)}}` : ''}\\` : ''}
+${community.name ? String.raw`\textbf{${text(community.name)}}${community.dates ? String.raw`\cvdates{${dateText(community.dates)}}` : ''}\\` : ''}
 ${projects ? String.raw`\begin{itemize}
 ${projects}
 \end{itemize}` : ''}`;
@@ -361,6 +361,17 @@ ${items.map(item => String.raw`\item ${text(item)}`).join('\n')}
 
 function htmlToPlain(value) {
   return String(value).replace(/<br\s*\/?>/gi, '; ').replace(/<[^>]+>/g, '');
+}
+
+function normalizeDateRange(value) {
+  return String(value)
+    .replace(/\s*(?:--|–|—|-)\s*/g, ' -- ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function dateText(value) {
+  return text(normalizeDateRange(htmlToPlain(value)));
 }
 
 function text(value) {
