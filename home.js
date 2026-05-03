@@ -26,19 +26,23 @@ function toAbsoluteUrl(value) {
 
 async function loadLang(lang) {
   const path = withBasePath(`i18n/${lang}.json`);
-  const [res, config] = await Promise.all([
+  const [res, config, manifest] = await Promise.all([
     fetch(path, { cache: 'no-store' }),
-    loadCvConfig()
+    loadCvConfig(),
+    loadPdfManifest()
   ]);
   if (!res.ok) throw new Error(`Failed to load ${path}`);
   const dict = await res.json();
   const jobOverrides = await loadJobOverrides(config, lang);
   const sharedOverrides = applyConfigOverrides(dict, config.shared, lang);
   const mainOverrides = applyJobOverrides(sharedOverrides, config.main, lang);
-  return applyConfigOverrides(mergeCvData(mainOverrides, jobOverrides), config.local, lang);
+  const merged = applyConfigOverrides(mergeCvData(mainOverrides, jobOverrides), config.local, lang);
+  merged.__cv_pdf_href = getCvPdfHref(config, manifest, lang);
+  return merged;
 }
 
 let _cvConfigPromise = null;
+let _pdfManifestPromise = null;
 
 async function loadCvConfig() {
   if (!_cvConfigPromise) {
@@ -49,6 +53,13 @@ async function loadCvConfig() {
     ]).then(([shared, local, main]) => ({ shared: shared || {}, local, main }));
   }
   return _cvConfigPromise;
+}
+
+async function loadPdfManifest() {
+  if (!_pdfManifestPromise) {
+    _pdfManifestPromise = fetchJson('cv/generated/manifest.json').then(manifest => manifest || {});
+  }
+  return _pdfManifestPromise;
 }
 
 function applyConfigOverrides(dict, config, lang) {
@@ -96,6 +107,13 @@ function getSelectedJobName(config) {
     config.shared?.job ||
     ''
   ).trim();
+}
+
+function getCvPdfHref(config, manifest, lang) {
+  const jobName = getSelectedJobName(config) || 'main';
+  const safeJobName = /^[a-z0-9_-]+$/i.test(jobName) ? jobName : 'main';
+  const pdfPath = manifest?.jobs?.[safeJobName]?.[lang]?.pdf;
+  return pdfPath ? withBasePath(pdfPath) : withBasePath(`cv/${window.location.search || ''}`);
 }
 
 async function loadJobOverrides(config, lang) {
@@ -198,7 +216,7 @@ function buildHomeLinks(dict) {
     'cv',
     'CV',
     'CV',
-    withBasePath(`cv/${window.location.search || ''}`)
+    dict.__cv_pdf_href || withBasePath(`cv/${window.location.search || ''}`)
   );
 
   Object.entries(contactInfo).forEach(([key, value]) => {
@@ -278,7 +296,8 @@ function isExternalLink(href) {
 }
 
 function isOpenInNewTab(href) {
-  return isExternalLink(href) || href === withBasePath('cv/');
+  const cleanHref = String(href || '').split(/[?#]/)[0];
+  return isExternalLink(href) || href === withBasePath('cv/') || cleanHref.endsWith('.pdf');
 }
 
 function getAnchorAttrs(href) {
