@@ -193,7 +193,9 @@ function renderLatex(data, lang) {
 \usepackage{array}
 \usepackage{needspace}
 \usepackage{ifthen}
-\IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{\setmainfont{Times New Roman}}
+\IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{
+  \IfFontExistsTF{Liberation Serif}{\setmainfont{Liberation Serif}}{}
+}
 \IfFontExistsTF{Noto Serif CJK SC}{\setCJKmainfont{Noto Serif CJK SC}}{
   \IfFontExistsTF{Songti SC}{\setCJKmainfont{Songti SC}}{
     \IfFontExistsTF{SimSun}{\setCJKmainfont{SimSun}}{\setCJKmainfont{AR PL UMing CN}}
