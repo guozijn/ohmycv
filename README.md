@@ -17,7 +17,6 @@ Open:
 
 ```text
 http://localhost:4173/
-http://localhost:4173/cv/
 ```
 
 ## Content files
@@ -32,7 +31,7 @@ http://localhost:4173/cv/
 
 The language JSON files are the main schema. You can customize names, contact fields, homepage title and prompt, section titles, education, skills, jobs, projects, certifications, publications, awards, referees, download button text, and print filename.
 
-The `/cv/` page displays prebuilt PDFs from `cv/generated/`. Run
+The homepage links to prebuilt PDFs from `cv/generated/`. Run
 `node scripts/build-cv-pdf.mjs` after changing CV content. The script writes the
 generated `.tex` sources and compiled PDFs for the base CV and every
 `config/cv-jobs/*.json` target.
@@ -110,13 +109,13 @@ To copy a `config/` directory from another checkout or private folder into this 
 
 ```bash
 node scripts/copy-config.mjs ../my-private-cv
-node scripts/copy-config.mjs ../my-private-cv/config --dry-run
+node scripts/build-cv-pdf.mjs
 ```
 
 For a one-off preview:
 
 ```text
-http://localhost:4173/cv/?job=software-engineer
+http://localhost:4173/
 ```
 
 ## Google Analytics
@@ -129,8 +128,8 @@ Set `google_analytics_id` to a GA4 measurement ID in `config/cv.json` or `config
 }
 ```
 
-Both the homepage and the CV page will inject the gtag script automatically. If the field is absent or empty, no tracking code is added.
+The homepage will inject the gtag script automatically. If the field is absent or empty, no tracking code is added.
 
 ## Deploy
 
-Deploy the directory as a static site. No build step is required.
+Deploy it to your cloud server through github ci, please refer to the deploy.example.yml. You can create your own repo for storing the cv config and github ci workflow, copy the deploy.example.yml to your repo's .github/workflows/.

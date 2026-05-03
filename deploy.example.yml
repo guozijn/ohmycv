@@ -1,0 +1,116 @@
+name: Deploy on push
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout YOUR_OWN_REPO config
+        uses: actions/checkout@v4
+        with:
+          path: cv-config
+
+      - name: Checkout OhMyCV template
+        uses: actions/checkout@v4
+        with:
+          repository: guozijn/ohmycv
+          ref: main
+          path: ohmycv
+
+      - name: Apply CV overrides
+        run: |
+          rsync -a --delete \
+            --exclude "local.json" \
+            cv-config/config/ \
+            ohmycv/config/
+
+      - name: Install LaTeX toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-xetex \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-lang-chinese \
+            fonts-noto-cjk
+
+      - name: Build LaTeX CV PDFs
+        run: node scripts/build-cv-pdf.mjs
+
+      - name: Inject static document title
+        run: |
+          node <<'EOF'
+          const { existsSync, readFileSync, writeFileSync } = require('node:fs');
+
+          const readJson = path => existsSync(path)
+            ? JSON.parse(readFileSync(path, 'utf8'))
+            : {};
+          const isObject = value => value && typeof value === 'object' && !Array.isArray(value);
+          const merge = (base, overrides) => {
+            if (!isObject(overrides)) return base;
+            const merged = { ...base };
+            Object.entries(overrides).forEach(([key, value]) => {
+              merged[key] = isObject(value) && isObject(merged[key])
+                ? merge(merged[key], value)
+                : value;
+            });
+            return merged;
+          };
+          const langSlice = (data, lang) => merge(
+            Object.fromEntries(Object.entries(data).filter(([key]) => key !== 'languages')),
+            data.languages?.[lang] || {}
+          );
+
+          const config = readJson('config/cv.json');
+          const main = readJson('config/cv-jobs/main.json');
+          const activeJob = config.active_job || config.cv_job || config.job || 'main';
+          const active = activeJob === 'main'
+            ? {}
+            : readJson(`config/cv-jobs/${activeJob}.json`);
+          const en = [config, main, active].reduce((acc, item) => merge(acc, langSlice(item, 'en')), {});
+          const homeTitle = en.homepage?.title || en.site?.title || en.profile?.name || 'OhMyCV';
+
+          const escapeHtml = value => String(value)
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;');
+
+          const html = readFileSync('index.html', 'utf8');
+          writeFileSync(
+            'index.html',
+            html.replace(/<title([^>]*)>.*?<\/title>/i, `<title$1>${escapeHtml(homeTitle)}</title>`)
+          );
+          EOF
+
+      - name: Start ssh-agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p ${{ secrets.SERVER_PORT }} -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Rsync to server
+        run: |
+          rsync -az --delete \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude "LICENSE" \
+            --exclude "README.md" \
+            -e "ssh -p ${{ secrets.SERVER_PORT }}" \
+            ./ \
+            root@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PATH }}
