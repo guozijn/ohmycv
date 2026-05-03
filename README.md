@@ -1,6 +1,6 @@
 # OhMyCV
 
-OhMyCV is a static multilingual CV renderer. It keeps content in JSON, supports language switching, job-specific overrides, local private overrides, a terminal-style homepage, and print-friendly PDF output.
+OhMyCV is a static multilingual CV renderer. It keeps content in JSON, supports language switching, job-specific overrides, local private overrides, a terminal-style homepage, and XeLaTeX-generated PDF output.
 
 The repository ships with a fake bilingual CV for `Alex Chen`; replace it with your own data before publishing a personal site.
 
@@ -9,6 +9,7 @@ The repository ships with a fake bilingual CV for `Alex Chen`; replace it with y
 Because the app loads JSON with `fetch`, serve the folder over HTTP:
 
 ```bash
+node scripts/build-cv-pdf.mjs
 python3 -m http.server 4173
 ```
 
@@ -24,13 +25,23 @@ http://localhost:4173/cv/
 - `i18n/en.json`: English CV and homepage content.
 - `i18n/zh.json`: Chinese CV and homepage content.
 - `config/cv.json`: commit-safe shared settings, including the default `active_job`.
+- `config/cv-jobs/main.json`: optional primary CV content layer used before job-specific overrides.
 - `config/cv-jobs/<job-name>.json`: optional job-specific overrides.
 - `config/local.json`: private local overrides, ignored by git.
 - `config/local.example.json`: example private override file.
 
 The language JSON files are the main schema. You can customize names, contact fields, homepage title and prompt, section titles, education, skills, jobs, projects, certifications, publications, awards, referees, download button text, and print filename.
 
+The `/cv/` page displays prebuilt PDFs from `cv/generated/`. Run
+`node scripts/build-cv-pdf.mjs` after changing CV content. The script writes the
+generated `.tex` sources and compiled PDFs for the base CV and every
+`config/cv-jobs/*.json` target.
+
 If you want to keep the shipped `i18n/*.json` sample CV untouched, put public shared overrides in `config/cv.json` instead. Use top-level fields for language-independent values, or `languages.<lang>` for language-specific content. Use `config/local.json` only for private machine-local data that should not be committed.
+
+For a cleaner personal setup, keep `config/cv.json` as a selector-only file and
+put the main CV content in `config/cv-jobs/main.json`. Job-specific files then
+only need to contain differences from `main`.
 
 Example `config/cv.json`:
 

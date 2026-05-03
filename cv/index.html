@@ -17,47 +17,11 @@
       <span id="loader-text" class="loader-text">Loading</span>
     </div>
   </div>
-  <div class="page cv-page">
-    <div class="header">
-      <div class="name" id="name"></div>
-      <div class="contact-info" id="contact-info"></div>
-    </div>
-
-    <div class="content">
-      <p id="profile-summary" class="profile-summary"></p>
-
-      <div class="section-title" id="education-title"></div>
-      <div id="education-list"></div>
-
-      <div class="section-title" id="skills-title"></div>
-      <ul id="skills-list"></ul>
-
-      <div class="section-title" id="experience-title"></div>
-      <div id="experience-list"></div>
-
-      <div class="section-title" id="open-source-title"></div>
-      <div class="institution" id="open-source-custom"></div>
-      <ul id="open-source-custom-projects"></ul>
-
-      <div class="section-title" id="patents-title"></div>
-      <ul id="patents-list"></ul>
-
-      <div class="section-title" id="open-source-community-title"></div>
-      <div class="institution" id="open-source-community-wrap"></div>
-      <ul id="open-source-projects"></ul>
-
-      <div class="section-title" id="awards-title"></div>
-      <ul id="awards-list"></ul>
-
-      <div class="section-title" id="cert-title"></div>
-      <ul id="cert-list"></ul>
-
-      <div id="referee-section" class="referee-section" hidden>
-        <div class="section-title" id="referee-title"></div>
-        <div id="referee-list"></div>
-        <div class="micro-note" id="referee-note"></div>
-      </div>
-    </div>
+  <div class="pdf-page">
+    <iframe id="cv-pdf" class="cv-pdf" title="CV" src="about:blank"></iframe>
+    <p class="pdf-fallback">
+      <a id="cv-pdf-fallback-link" href="../cv/generated/manifest.json">Download PDF</a>
+    </p>
   </div>
 
   <div class="toolbar">
@@ -70,11 +34,11 @@
         <li role="option" data-lang="zh">中文</li>
       </ul>
     </div>
-    <button onclick="window.print()" class="cv-btn download-btn" type="button" aria-label="Download PDF" title="Download PDF">
+    <a id="download-pdf" class="cv-btn download-btn" href="../cv/generated/manifest.json" download aria-label="Download PDF" title="Download PDF">
       <svg class="download-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-    </button>
+    </a>
   </div>
 
   <script src="../cv.js"></script>

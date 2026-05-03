@@ -116,6 +116,9 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
+.cv-build/
+cv/generated/
+
 # Firebase cache directory
 .firebase/
 

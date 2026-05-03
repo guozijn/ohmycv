@@ -34,7 +34,8 @@ async function loadLang(lang) {
   const dict = await res.json();
   const jobOverrides = await loadJobOverrides(config, lang);
   const sharedOverrides = applyConfigOverrides(dict, config.shared, lang);
-  return applyConfigOverrides(mergeCvData(sharedOverrides, jobOverrides), config.local, lang);
+  const mainOverrides = applyJobOverrides(sharedOverrides, config.main, lang);
+  return applyConfigOverrides(mergeCvData(mainOverrides, jobOverrides), config.local, lang);
 }
 
 let _cvConfigPromise = null;
@@ -43,8 +44,9 @@ async function loadCvConfig() {
   if (!_cvConfigPromise) {
     _cvConfigPromise = Promise.all([
       fetchJson('config/cv.json'),
-      fetchJson('config/local.json')
-    ]).then(([shared, local]) => ({ shared: shared || {}, local }));
+      fetchJson('config/local.json'),
+      fetchJson('config/cv-jobs/main.json')
+    ]).then(([shared, local, main]) => ({ shared: shared || {}, local, main }));
   }
   return _cvConfigPromise;
 }
@@ -71,6 +73,13 @@ function mergeCvData(base, overrides) {
     }
   });
   return merged;
+}
+
+function applyJobOverrides(dict, overrides, lang) {
+  if (!overrides) return dict;
+  const { languages, ...globalOverrides } = overrides;
+  const langOverrides = languages?.[lang] || overrides[lang] || {};
+  return mergeCvData(mergeCvData(dict, globalOverrides), langOverrides);
 }
 
 function getSelectedJobName(config) {
@@ -691,7 +700,11 @@ async function loadHome() {
   setLoading(true);
   try {
     loadCvConfig().then(config => {
-      injectGoogleAnalytics(config.local?.google_analytics_id || config.shared?.google_analytics_id);
+      injectGoogleAnalytics(
+        config.local?.google_analytics_id ||
+        config.main?.google_analytics_id ||
+        config.shared?.google_analytics_id
+      );
     });
     const dict = await loadLang('en');
     renderHome(dict);

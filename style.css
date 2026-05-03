@@ -39,6 +39,14 @@ body {
   box-sizing: border-box;
 }
 
+body:has(.pdf-page) {
+  max-width: none;
+  height: 100vh;
+  padding: 0;
+  overflow: hidden;
+  background: #2f3136;
+}
+
 .page {
   max-width: var(--page-max-width);
   margin: 0 auto;
@@ -47,6 +55,32 @@ body {
   padding: clamp(18px, 2vw, 28px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pdf-page {
+  width: 100vw;
+  height: 100vh;
+  background: #2f3136;
+}
+
+.cv-pdf {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #2f3136;
+}
+
+.pdf-fallback {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  margin: 0;
+  font-size: 13px;
+}
+
+.pdf-fallback a {
+  color: #fff;
 }
 
 .loader {
@@ -61,6 +95,7 @@ body {
 }
 .loader.hidden {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 .loader-terminal {
