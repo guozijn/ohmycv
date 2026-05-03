@@ -71,7 +71,7 @@ function setLoading(isLoading) {
 
 function updateLangUI(lang) {
   const label = document.getElementById('lang-label');
-  if (label) label.textContent = lang === 'zh' ? '中文' : 'EN';
+  if (label) label.textContent = lang === 'zh' ? 'ZH' : 'EN';
   document.querySelectorAll('#lang-menu li').forEach(li => {
     li.setAttribute('aria-selected', li.dataset.lang === lang ? 'true' : 'false');
   });
