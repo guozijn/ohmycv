@@ -37,7 +37,12 @@ async function loadLang(lang) {
   const sharedOverrides = applyConfigOverrides(dict, config.shared, lang);
   const mainOverrides = applyJobOverrides(sharedOverrides, config.main, lang);
   const merged = applyConfigOverrides(mergeCvData(mainOverrides, jobOverrides), config.local, lang);
+  merged.__lang = lang;
   merged.__cv_pdf_href = getCvPdfHref(config, manifest, lang);
+  merged.__cv_pdf_hrefs = {
+    en: getCvPdfHref(config, manifest, 'en'),
+    zh: getCvPdfHref(config, manifest, 'zh')
+  };
   return merged;
 }
 
@@ -113,7 +118,7 @@ function getCvPdfHref(config, manifest, lang) {
   const jobName = getSelectedJobName(config) || 'main';
   const safeJobName = /^[a-z0-9_-]+$/i.test(jobName) ? jobName : 'main';
   const pdfPath = manifest?.jobs?.[safeJobName]?.[lang]?.pdf;
-  return pdfPath ? withBasePath(pdfPath) : withBasePath(`cv/${window.location.search || ''}`);
+  return pdfPath ? withBasePath(pdfPath) : '';
 }
 
 async function loadJobOverrides(config, lang) {
@@ -191,9 +196,13 @@ function escapeHTML(value) {
 function getContactLabelMap() {
   return {
     'Phone': { key: 'phone', label: 'Phone' },
+    '电话': { key: 'phone', label: 'Phone' },
     'Email': { key: 'email', label: 'Email' },
+    '邮箱': { key: 'email', label: 'Email' },
     'Blog': { key: 'blog', label: 'Blog' },
+    '博客': { key: 'blog', label: 'Blog' },
     'Github': { key: 'github', label: 'GitHub' },
+    'GitHub': { key: 'github', label: 'GitHub' },
     'LinkedIn': { key: 'linkedin', label: 'LinkedIn' }
   };
 }
@@ -216,8 +225,10 @@ function buildHomeLinks(dict) {
     'cv',
     'CV',
     'CV',
-    dict.__cv_pdf_href || withBasePath(`cv/${window.location.search || ''}`)
+    dict.__cv_pdf_href
   );
+  pushLink('cv-en', 'CV EN', 'CV EN', dict.__cv_pdf_hrefs?.en);
+  pushLink('cv-zh', 'CV ZH', 'CV ZH', dict.__cv_pdf_hrefs?.zh);
 
   Object.entries(contactInfo).forEach(([key, value]) => {
     const mapped = labelMap[key];
@@ -239,7 +250,7 @@ function buildHomeLinks(dict) {
 }
 
 function getLocationValue(contactInfo) {
-  return contactInfo.Address || '';
+  return contactInfo.Address || contactInfo['地址'] || '';
 }
 
 function getUIStrings(dict = {}) {
@@ -264,6 +275,8 @@ function getUIStrings(dict = {}) {
       about: 'about',
       links: 'links',
       cv: 'cv',
+      'cv-en': 'cv-en',
+      'cv-zh': 'cv-zh',
       blog: 'blog',
       github: 'github',
       linkedin: 'linkedin',
@@ -280,7 +293,9 @@ function getUIStrings(dict = {}) {
       whoami: 'show the current user name',
       about: 'show profile summary',
       links: 'list all quick links',
-      cv: 'open the CV page',
+      cv: 'open the CV PDF for this browser language',
+      'cv-en': 'open the English CV PDF',
+      'cv-zh': 'open the Chinese CV PDF',
       blog: 'open the blog link',
       github: 'open the GitHub profile',
       linkedin: 'open the LinkedIn profile',
@@ -297,7 +312,7 @@ function isExternalLink(href) {
 
 function isOpenInNewTab(href) {
   const cleanHref = String(href || '').split(/[?#]/)[0];
-  return isExternalLink(href) || href === withBasePath('cv/') || cleanHref.endsWith('.pdf');
+  return isExternalLink(href) || cleanHref.endsWith('.pdf');
 }
 
 function getAnchorAttrs(href) {
@@ -468,8 +483,7 @@ function appendCompletionMatches(matches) {
 function buildGreetingHTML(dict, links) {
   const linkMap = new Map((links || []).map(item => [item.key, item]));
   const tokens = {
-    help: '<code>help</code>',
-    cv: `<a href="${escapeHTML(withBasePath('cv/'))}"${getAnchorAttrs(withBasePath('cv/'))}>cv</a>`
+    help: '<code>help</code>'
   };
   linkMap.forEach((item, key) => {
     tokens[key] = `<a href="${escapeHTML(item.href)}"${getAnchorAttrs(item.href)}>${escapeHTML(key)}</a>`;
@@ -481,8 +495,9 @@ function buildGreetingHTML(dict, links) {
 
 function setIntro(dict) {
   document.title = dict.homepage?.title || dict.site?.title || dict.profile?.name || 'OhMyCV';
-  document.documentElement.lang = 'en';
-  document.body.setAttribute('lang', 'en');
+  const lang = dict.__lang || 'en';
+  document.documentElement.lang = lang;
+  document.body.setAttribute('lang', lang);
   document.body.classList.add('terminal-home');
 
   const promptEl = document.getElementById('terminal-prompt');
@@ -725,7 +740,8 @@ async function loadHome() {
         config.shared?.google_analytics_id
       );
     });
-    const dict = await loadLang('en');
+    const lang = getPreferredLang();
+    const dict = await loadLang(lang);
     renderHome(dict);
   } catch (err) {
     console.error(err);
@@ -733,6 +749,10 @@ async function loadHome() {
   } finally {
     setLoading(false);
   }
+}
+
+function getPreferredLang() {
+  return (navigator.language || 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en';
 }
 
 (function init() {
