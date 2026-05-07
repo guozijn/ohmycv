@@ -148,3 +148,4 @@ vite.config.ts.timestamp-*
 # OhMyCV local files
 config/local.json
 .playwright-cli/
+.superpowers/
