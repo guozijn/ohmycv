@@ -125,3 +125,35 @@ test('Escape clears the console input line', async ({ page }) => {
   await input.press('Escape');
   await expect(input).toHaveValue('');
 });
+
+test.describe('selected', () => {
+  test('renders one card per i18n entry', async ({ page }) => {
+    await page.goto('/');
+    const cards = page.locator('.selected .selected-card');
+    await expect(cards).toHaveCount(3);
+  });
+
+  test('each card shows kind, meta, title, body, and verb link', async ({ page }) => {
+    await page.goto('/');
+    const first = page.locator('.selected .selected-card').first();
+    await expect(first.locator('.selected-kind')).toBeVisible();
+    await expect(first.locator('.selected-meta')).toBeVisible();
+    await expect(first.locator('.selected-title')).toBeVisible();
+    await expect(first.locator('.selected-body')).toBeVisible();
+    await expect(first.locator('.selected-link')).toBeVisible();
+  });
+
+  test('section label is shown', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.selected .section-label')).toContainText(/selected/i);
+  });
+
+  test('reduced-motion makes cards visible immediately', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await context.newPage();
+    await page.goto('/');
+    const card = page.locator('.selected .selected-card').first();
+    await expect(card).toHaveAttribute('data-revealed', 'true');
+    await context.close();
+  });
+});

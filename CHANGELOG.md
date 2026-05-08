@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Selected work section (`home/render-selected.js`): editorial cards rendered from `homepage.selected`, separated by 1px dashed top rules. IntersectionObserver-driven fade+rise reveal on scroll; reduced-motion shows cards immediately. Title hover transitions to vermilion; verb-link hover grows an underline.
 - Console live-pulse breathing animation (2.4s, vermilion). Disabled under `prefers-reduced-motion`.
 - Escape key clears the current console input line.
 - Console focus-within state: vermilion inner ring + deeper shadow when the input is focused.
