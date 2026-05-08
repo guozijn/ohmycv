@@ -203,6 +203,7 @@ function renderLatex(data, lang) {
 }
 \definecolor{accent}{HTML}{0070C9}
 \definecolor{textgray}{HTML}{333333}
+\definecolor{rulegray}{HTML}{B0B0B0}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{2pt}
@@ -211,6 +212,7 @@ function renderLatex(data, lang) {
 \titlespacing*{\section}{0pt}{6pt}{3pt}
 \newcommand{\cvdates}[1]{\hfill{\footnotesize #1}}
 \newcommand{\entryhead}[3]{\Needspace{3\baselineskip}\textbf{#1}\ifthenelse{\equal{#2}{}}{}{ -- #2}\cvdates{#3}\\}
+\newcommand{\jobsep}{{\par\addvspace{6pt}\noindent\leavevmode\color{rulegray}\leaders\hbox to 6pt{\hss\vrule width 3pt height 0.3pt\hss}\hfill\kern0pt\par\addvspace{4pt}}}
 \begin{document}
 {\centering
   {\LARGE\bfseries ${text(data.profile?.name || 'CV')}}\\[3pt]
@@ -293,7 +295,7 @@ function renderExperience(section = {}) {
     return String.raw`\entryhead{${text(job.company)}}{${location}}{${dateText(job.dates || '')}}
 \textit{${text(job.title || '')}}\\[-2pt]
 ${items}`;
-  }).join('\n');
+  }).join('\n\\jobsep\n');
   return section.title && jobs ? String.raw`\section*{${text(section.title)}}` + '\n' + jobs : '';
 }
 

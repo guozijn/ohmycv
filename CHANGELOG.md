@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Dashed gray separator (`\jobsep`) between successive entries in the EXPERIENCE section of the generated CV PDFs. Uses `\leaders` with thin rules tinted by a new `rulegray` color (#B0B0B0) so it reads as a quiet editorial separator rather than a heavy black bar.
+
 ### Changed
 
 - Favicon redesigned to match the editorial palette: ink ground (`#1a0f08`), vermilion `>_` glyph (`#ff4d2e`), thicker underscore as a solid rounded rect for legibility at 16x16 tab size. Replaces the green-on-black terminal favicon from the prior design.
