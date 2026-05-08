@@ -1,11 +1,6 @@
 {
-  "site": {
-    "title": "Alex Chen",
-    "print_filename": "Alex-Chen-CV",
-    "download_label": "Download PDF"
-  },
   "homepage": {
-    "title": "Alex Chen",
+    "print_filename": "Alex-Chen-CV",
     "prompt": "alex@ohmycv:~$",
     "greeting": "Type {help} to see commands, or jump straight to {cv}, {github}, or {linkedin}.",
     "links": [
@@ -26,7 +21,8 @@
       "Github": "github.com/alexchen-demo",
       "LinkedIn": "linkedin.com/in/alexchen-demo"
     },
-    "summary": "Product-minded software engineer with experience building multilingual web products, data workflows, and cloud-native services. Comfortable moving between frontend interfaces, backend APIs, automation, and developer tooling. Interested in reliable systems, thoughtful UX, and practical applications of AI-assisted software development."
+    "summary": "Product-minded software engineer with experience building multilingual web products, data workflows, and cloud-native services. Comfortable moving between frontend interfaces, backend APIs, automation, and developer tooling. Interested in reliable systems, thoughtful UX, and practical applications of AI-assisted software development.",
+    "summary_emphasis": "thoughtful UX, and practical applications of AI-assisted software development"
   },
   "education": {
     "title": "EDUCATION",
@@ -47,11 +43,26 @@
   "skills": {
     "title": "SKILLS",
     "items": [
-      { "label": "Frontend", "value": "JavaScript, TypeScript, React, Vite, HTML, CSS, accessibility, responsive design" },
-      { "label": "Backend", "value": "Node.js, Python, REST APIs, PostgreSQL, Redis, background jobs" },
-      { "label": "Cloud & DevOps", "value": "Docker, GitHub Actions, Linux, Nginx, AWS, observability basics" },
-      { "label": "AI Tooling", "value": "Prompt workflows, evaluation scripts, document processing, coding assistants" },
-      { "label": "Languages", "value": "English, Mandarin" }
+      {
+        "label": "Frontend",
+        "value": "JavaScript, TypeScript, React, Vite, HTML, CSS, accessibility, responsive design"
+      },
+      {
+        "label": "Backend",
+        "value": "Node.js, Python, REST APIs, PostgreSQL, Redis, background jobs"
+      },
+      {
+        "label": "Cloud & DevOps",
+        "value": "Docker, GitHub Actions, Linux, Nginx, AWS, observability basics"
+      },
+      {
+        "label": "AI Tooling",
+        "value": "Prompt workflows, evaluation scripts, document processing, coding assistants"
+      },
+      {
+        "label": "Languages",
+        "value": "English, Mandarin"
+      }
     ]
   },
   "experience": {
@@ -98,9 +109,18 @@
     "title": "PROJECTS",
     "custom": "Selected work",
     "custom_projects": [
-      { "title": "OhMyCV", "desc": "A static, multilingual CV renderer driven by JSON configuration, with job-specific overrides and print-friendly output." },
-      { "title": "Dataset QA Toolkit", "desc": "A small command-line toolkit for validating CSV schemas, sampling records, and producing review summaries." },
-      { "title": "Support Macro Library", "desc": "Reusable templates and scripts that helped a support team standardize common customer responses." }
+      {
+        "title": "OhMyCV",
+        "desc": "A static, multilingual CV renderer driven by JSON configuration, with job-specific overrides and print-friendly output."
+      },
+      {
+        "title": "Dataset QA Toolkit",
+        "desc": "A small command-line toolkit for validating CSV schemas, sampling records, and producing review summaries."
+      },
+      {
+        "title": "Support Macro Library",
+        "desc": "Reusable templates and scripts that helped a support team standardize common customer responses."
+      }
     ],
     "community_title": "OPEN SOURCE",
     "community": {
@@ -108,8 +128,14 @@
       "dates": "2021 - Present"
     },
     "projects": [
-      { "title": "Docs Improvements", "desc": "Improved installation guides, examples, and issue templates for developer tooling projects." },
-      { "title": "Bug Fixes", "desc": "Contributed small fixes around accessibility, configuration loading, and test reliability." }
+      {
+        "title": "Docs Improvements",
+        "desc": "Improved installation guides, examples, and issue templates for developer tooling projects."
+      },
+      {
+        "title": "Bug Fixes",
+        "desc": "Contributed small fixes around accessibility, configuration loading, and test reliability."
+      }
     ]
   },
   "certifications": {
@@ -140,8 +166,14 @@
   "awards": {
     "title": "HONORS",
     "items": [
-      { "type": "text", "text": "Northstar Labs Engineering Impact Award (2025)" },
-      { "type": "text", "text": "Harbour City University Dean's List (2020)" }
+      {
+        "type": "text",
+        "text": "Northstar Labs Engineering Impact Award (2025)"
+      },
+      {
+        "type": "text",
+        "text": "Harbour City University Dean's List (2020)"
+      }
     ]
   },
   "referees": {

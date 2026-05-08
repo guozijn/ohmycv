@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OhMyCV</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040a07'/%3E%3Cpath d='M18 22l12 10-12 10' stroke='%235cff9b' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M36 43h10' stroke='%235cff9b' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <title></title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a0f08'/%3E%3Cpath d='M20 22 L32 32 L20 42' stroke='%23ff4d2e' stroke-width='7' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Crect x='38' y='40' width='14' height='5' rx='2.5' fill='%23ff4d2e'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;800&family=Geist+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,144,300..600&display=swap"
+    rel="stylesheet"
+  >
   <link rel="stylesheet" href="./style.css">
 </head>
-<body data-base-path=".">
+<body data-base-path="." class="landing-body">
   <div id="loader" class="loader" role="status" aria-live="polite">
     <div class="loader-terminal" aria-hidden="true">
       <span class="loader-logo">
@@ -18,19 +24,18 @@
     </div>
   </div>
 
-  <main class="terminal-shell">
-    <section class="terminal-window" aria-label="Terminal Home">
-      <div class="terminal-chrome">
-        <div class="terminal-dots" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+  <main class="landing">
+    <header class="topbar" id="topbar"></header>
+
+    <section class="hero" id="hero" aria-label="Introduction"></section>
+
+    <section class="console" id="console" aria-label="Interactive terminal">
+      <div class="console-chrome">
+        <span class="console-chrome-id"></span>
+        <span class="console-pulse" aria-hidden="true"></span>
       </div>
-
-      <div class="terminal-body">
+      <div class="console-body">
         <div class="terminal-output" id="terminal-output" aria-live="polite"></div>
-
         <form class="terminal-input-row" id="terminal-form" autocomplete="off">
           <label class="terminal-prompt" for="terminal-input" id="terminal-prompt">$</label>
           <input
@@ -46,8 +51,14 @@
         </form>
       </div>
     </section>
+
+    <section class="selected" id="selected" aria-label="Selected work"></section>
+
+    <section class="about" id="about" aria-label="About"></section>
+
+    <footer class="elsewhere" id="elsewhere" aria-label="Contact and downloads"></footer>
   </main>
 
-  <script src="./home.js"></script>
+  <script type="module" src="./home.js"></script>
 </body>
 </html>

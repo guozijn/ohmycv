@@ -40,7 +40,7 @@ for (const target of targets) {
   for (const lang of langs) {
     const data = loadCvData(lang, target.jobName);
     const tex = renderLatex(data, lang);
-    const filenameBase = safeFilename(data.site?.print_filename || data.profile?.name || target.slug);
+    const filenameBase = safeFilename(data.homepage?.print_filename || data.profile?.name || target.slug);
     const outputBase = `${filenameBase}-${lang}-${buildDate}`;
     const texName = `${outputBase}.tex`;
     const pdfName = `${outputBase}.pdf`;
@@ -66,7 +66,7 @@ for (const target of targets) {
       pdf: `cv/generated/${pdfName}`,
       tex: `cv/generated/${texName}`,
       filename: pdfName,
-      print_filename: data.site?.print_filename || ''
+      print_filename: data.homepage?.print_filename || ''
     };
     console.log(`Built ${relativeFromRoot(outPdfPath)}`);
   }
@@ -213,7 +213,7 @@ function renderLatex(data, lang) {
 \newcommand{\entryhead}[3]{\Needspace{3\baselineskip}\textbf{#1}\ifthenelse{\equal{#2}{}}{}{ -- #2}\cvdates{#3}\\}
 \begin{document}
 {\centering
-  {\LARGE\bfseries ${text(data.profile?.name || data.site?.title || 'CV')}}\\[3pt]
+  {\LARGE\bfseries ${text(data.profile?.name || 'CV')}}\\[3pt]
   {\footnotesize ${contact}}\\[-1pt]
   \rule{\textwidth}{0.8pt}
 \par}

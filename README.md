@@ -19,6 +19,63 @@ Open:
 http://localhost:4173/
 ```
 
+## Building the CV PDF
+
+`scripts/build-cv-pdf.mjs` shells out to `xelatex` (XeTeX engine) to compile the LaTeX sources for both languages and every job target. You need a working TeX distribution with XeTeX and CJK font support installed before the script can produce PDFs.
+
+- **macOS:** install [MacTeX](https://www.tug.org/mactex/) (full distribution) or BasicTeX plus the additional packages `xetex`, `fontspec`, `xeCJK`, `ctex`, `titlesec`, `enumitem`, `needspace`, and `geometry`.
+- **Linux (Debian/Ubuntu):** `sudo apt install texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-latex-extra`.
+- **Linux (Arch):** `sudo pacman -S texlive-xetex texlive-langchinese texlive-fontsrecommended texlive-latexextra`.
+- **Windows:** install [TeX Live](https://tug.org/texlive/) or [MiKTeX](https://miktex.org/) with the same packages.
+
+Verify the toolchain is reachable:
+
+```bash
+xelatex --version
+```
+
+If `xelatex` is not on `PATH`, the build script will fail at the first job target. The Chinese CV needs CJK fonts — `xeCJK` plus a serif/sans CJK font (Source Han Serif/Sans, Noto Serif/Sans CJK, or system fallbacks) — otherwise the zh build produces blank glyphs.
+
+The compiled PDFs are written to `cv/generated/` (gitignored) along with a `manifest.json` consumed by the homepage to resolve the top-bar `CV ↗` link to the right file per language.
+
+## Tests
+
+```bash
+npm install
+npm run test:install   # one-time: download Chromium for Playwright
+npm test               # run smoke tests
+```
+
+The Playwright config in `playwright.config.js` automatically starts `python3 -m http.server 4173`.
+
+## Performance budget
+
+The landing page targets:
+
+- LCP <= 1.8s on simulated 4G (Moto G4) — verify periodically via Chrome DevTools Lighthouse.
+- CLS <= 0.05.
+- Initial transferred bytes <= 200 KB on English (Latin webfonts only) and <= 400 KB on Chinese (CJK weights are lazy-loaded on first language switch).
+
+## i18n fields
+
+The homepage consumes these fields from the merged data:
+
+| Field | Type | Source / use |
+|---|---|---|
+| `profile.name` | string | Hero name and document title. |
+| `profile.contact_info` | object | Footer contact row; first non-email/phone/url value also feeds the hero meta line as a location fallback. |
+| `profile.summary` | string | About paragraph. |
+| `profile.summary_emphasis` | string (optional) | Substring of `profile.summary` rendered as an italicized emphasis. |
+| `homepage.prompt` | string | Terminal prompt and source for the wordmark / chrome handle (`<user>@<host>:...` pattern; the part before `@` becomes `~/<handle>`). |
+| `homepage.greeting` | string | Boot line printed in the terminal on first paint. |
+| `homepage.print_filename` | string | Base filename for the LaTeX-compiled PDF (e.g. `Zijian-Guo-CV`). |
+| `homepage.links` | object[] | Extra `{ command, url, label }` link entries surfaced as terminal commands. |
+| `homepage.tagline` | string (optional) | Italicized accent below the name. |
+| `homepage.meta` | string[] (optional) | Explicit mono meta line. Falls back to `experience.jobs[0].location` + `experience.jobs[0].title` when absent. |
+| `homepage.selected` | object[] (optional) | Selected-work cards `{ kind, meta, title, body, link?: { label, href } }`. Falls back to one entry from `experience.jobs[0]` plus up to two from `open_source.custom_projects` when absent. |
+| `experience.jobs[]` | object[] | Source for the printed CV and the derived selected `role` card. |
+| `open_source.custom_projects[]` | object[] | Source for derived selected `project` cards. |
+
 ## Content files
 
 - `i18n/en.json`: English CV and homepage content.
@@ -29,7 +86,7 @@ http://localhost:4173/
 - `config/local.json`: private local overrides, ignored by git.
 - `config/local.example.json`: example private override file.
 
-The language JSON files are the main schema. You can customize names, contact fields, homepage title and prompt, section titles, education, skills, jobs, projects, certifications, publications, awards, referees, download button text, and print filename.
+The language JSON files are the main schema. You can customize names, contact fields, the terminal prompt and greeting, section titles, education, skills, jobs, projects, certifications, publications, awards, referees, and the print filename. The browser tab title is taken from `profile.name`; there is no separate site/homepage title field.
 
 The homepage links to prebuilt PDFs from `cv/generated/`. Run
 `node scripts/build-cv-pdf.mjs` after changing CV content. The script writes the
