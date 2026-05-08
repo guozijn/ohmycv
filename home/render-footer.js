@@ -3,7 +3,6 @@ export function renderFooter({ data }) {
   if (!root) return;
 
   const contact = data.profile?.contact_info || {};
-  const colophon = data.homepage?.colophon || '';
 
   const contactItems = Object.entries(contact)
     .filter(([, value]) => Boolean(value))
@@ -15,7 +14,6 @@ export function renderFooter({ data }) {
     <ul class="contact-list" role="list">
       ${contactItems.join('<span class="contact-sep" aria-hidden="true"> · </span>')}
     </ul>
-    ${colophon ? `<p class="colophon">${escapeHtml(colophon)}</p>` : ''}
   `;
 }
 

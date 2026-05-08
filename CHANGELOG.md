@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Removed
 
 - Footer dual-language CV download list (`↓ cv · en` / `↓ cv · zh`). The top-bar CV link is the single canonical download affordance; the footer kept contact list and colophon. Dead `.cv-list` / `.cv-link` CSS removed.
+- Footer colophon line (`built with terminal & care · 2026 · MIT`) and the supporting `homepage.colophon` i18n field. The footer now ends after the contact list. Removed the `.colophon` CSS rule, the colophon Playwright test, and the colophon row from the README i18n-fields table.
 
 ## [0.1.0] - 2026-05-08
 

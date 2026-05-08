@@ -46,7 +46,6 @@ The redesigned homepage consumes these optional fields (see `i18n/en.json` and `
 | `homepage.tagline` | string | Italicized accent below the name. |
 | `homepage.meta` | string[] | Mono meta line, joined with mono dots. |
 | `homepage.selected` | object[] | Selected work cards: `{ kind, meta, title, body, link: { label, href } }`. |
-| `homepage.colophon` | string | Single-line footer credit. |
 | `profile.summary_emphasis` | string | Substring of `profile.summary` to italicize for editorial rhythm. |
 
 ## Content files

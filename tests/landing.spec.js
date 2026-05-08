@@ -198,10 +198,6 @@ test.describe('footer', () => {
     await expect(page.locator('.elsewhere .cv-link')).toHaveCount(0);
   });
 
-  test('colophon line rendered', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.locator('.elsewhere .colophon')).toBeVisible();
-  });
 });
 
 test.describe('motion', () => {

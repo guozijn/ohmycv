@@ -459,13 +459,6 @@
   .contact-list a:hover { color: var(--accent); }
   .contact-sep { color: var(--ink-soft); margin: 0 8px; }
 
-  .colophon {
-    margin: 24px 0 0;
-    font-family: var(--font-mono-editorial);
-    font-size: 11px;
-    color: var(--ink-soft);
-  }
-
   :lang(zh) .hero-tagline {
     font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif;
     font-style: normal;
