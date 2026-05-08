@@ -8,6 +8,12 @@
     "title": "Alex Chen",
     "prompt": "alex@ohmycv:~$",
     "greeting": "输入 {help} 查看命令，或直接打开 {cv}、{github}、{linkedin}。",
+    "tagline": "构建经得起推敲的软件",
+    "meta": [
+      "墨尔本",
+      "软件工程师",
+      "中 / 英"
+    ],
     "links": [
       {
         "label": "作品集",
@@ -15,7 +21,31 @@
         "url": "https://example.com",
         "text": "example.com"
       }
-    ]
+    ],
+    "selected": [
+      {
+        "kind": "role",
+        "meta": "2024 — 至今",
+        "title": "Northstar Labs",
+        "body": "在 React 与 TypeScript 上构建面向客户的仪表板与平台,关注发布工具与可观测性。",
+        "link": { "label": "了解更多", "href": "#" }
+      },
+      {
+        "kind": "project",
+        "meta": "开源",
+        "title": "OhMyCV",
+        "body": "一个静态、多语言的简历渲染器,内容存为 JSON,支持语言切换与 LaTeX 编译的 PDF。",
+        "link": { "label": "GitHub", "href": "https://github.com/example/ohmycv" }
+      },
+      {
+        "kind": "now",
+        "meta": "2026 Q2",
+        "title": "面向产品团队的 AI 工具",
+        "body": "探索 AI 辅助软件开发的实际应用 —— 提示词工作流、评估脚本、文档处理。",
+        "link": { "label": "笔记", "href": "#" }
+      }
+    ],
+    "colophon": "终端与匠心 · 2026 · MIT"
   },
   "profile": {
     "name": "陈安",
@@ -26,7 +56,8 @@
       "Github": "github.com/alexchen-demo",
       "LinkedIn": "linkedin.com/in/alexchen-demo"
     },
-    "summary": "注重产品体验的软件工程师，具备多语言 Web 产品、数据流程和云原生服务开发经验。能够在前端界面、后端 API、自动化与开发者工具之间切换，关注可靠系统、清晰 UX，以及 AI 辅助软件开发的实用落地。"
+    "summary": "注重产品体验的软件工程师，具备多语言 Web 产品、数据流程和云原生服务开发经验。能够在前端界面、后端 API、自动化与开发者工具之间切换，关注可靠系统、清晰 UX，以及 AI 辅助软件开发的实用落地。",
+    "summary_emphasis": "AI 辅助软件开发的实用落地"
   },
   "education": {
     "title": "教育背景",

@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- New optional i18n fields for the editorial homepage: `homepage.tagline`, `homepage.meta`, `homepage.selected`, `homepage.colophon`, `profile.summary_emphasis`. Added with sample content in both `en.json` and `zh.json`.
 - Playwright smoke tests (`tests/landing.spec.js`) covering terminal render, greeting, command handling (`whoami`, `cv`), and locale-driven `html lang` attribute.
 - Vermilion · Editorial visual token set (`--paper`, `--ink`, `--accent`, `--ink-soft`, `--rule`, type stack, motion easing).
 - Geist, Geist Mono, and Fraunces webfonts loaded from Google Fonts at startup. CJK fonts deferred until Chinese is activated (Task 13).

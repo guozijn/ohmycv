@@ -8,6 +8,12 @@
     "title": "Alex Chen",
     "prompt": "alex@ohmycv:~$",
     "greeting": "Type {help} to see commands, or jump straight to {cv}, {github}, or {linkedin}.",
+    "tagline": "building thoughtful software",
+    "meta": [
+      "Melbourne, Australia",
+      "Software Engineer",
+      "EN / ZH"
+    ],
     "links": [
       {
         "label": "Portfolio",
@@ -15,7 +21,31 @@
         "url": "https://example.com",
         "text": "example.com"
       }
-    ]
+    ],
+    "selected": [
+      {
+        "kind": "role",
+        "meta": "2024 — present",
+        "title": "Northstar Labs",
+        "body": "Customer-facing dashboards and platform work in React and TypeScript, with a focus on reliable release tooling and observability.",
+        "link": { "label": "read more", "href": "#" }
+      },
+      {
+        "kind": "project",
+        "meta": "open source",
+        "title": "OhMyCV",
+        "body": "A static, multilingual CV renderer with JSON content, language switching, and LaTeX-generated PDFs.",
+        "link": { "label": "github", "href": "https://github.com/example/ohmycv" }
+      },
+      {
+        "kind": "now",
+        "meta": "Q2 2026",
+        "title": "AI tooling for product teams",
+        "body": "Exploring practical applications of AI-assisted software development — prompt workflows, evaluation harnesses, document processing.",
+        "link": { "label": "notes", "href": "#" }
+      }
+    ],
+    "colophon": "built with terminal & care · 2026 · MIT"
   },
   "profile": {
     "name": "Alex Chen",
@@ -26,7 +56,8 @@
       "Github": "github.com/alexchen-demo",
       "LinkedIn": "linkedin.com/in/alexchen-demo"
     },
-    "summary": "Product-minded software engineer with experience building multilingual web products, data workflows, and cloud-native services. Comfortable moving between frontend interfaces, backend APIs, automation, and developer tooling. Interested in reliable systems, thoughtful UX, and practical applications of AI-assisted software development."
+    "summary": "Product-minded software engineer with experience building multilingual web products, data workflows, and cloud-native services. Comfortable moving between frontend interfaces, backend APIs, automation, and developer tooling. Interested in reliable systems, thoughtful UX, and practical applications of AI-assisted software development.",
+    "summary_emphasis": "thoughtful UX, and practical applications of AI-assisted software development"
   },
   "education": {
     "title": "EDUCATION",
