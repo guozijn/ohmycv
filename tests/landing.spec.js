@@ -81,7 +81,7 @@ test.describe('top bar', () => {
     await expect(page.locator('.topbar .lang-toggle')).toBeVisible();
   });
 
-  test('CV link, if present, points to a real PDF', async ({ page }) => {
+  test('CV link, if present, points to a PDF and opens in a new tab', async ({ page }) => {
     await page.goto('/');
     const link = page.locator('.topbar .topbar-cv');
     const count = await link.count();
@@ -91,6 +91,10 @@ test.describe('top bar', () => {
     }
     const href = await link.getAttribute('href');
     expect(href).toMatch(/\.pdf$/);
+    expect(await link.getAttribute('target')).toBe('_blank');
+    expect(await link.getAttribute('rel')).toContain('noopener');
+    // Click opens the PDF in-place; download attribute should be absent.
+    expect(await link.getAttribute('download')).toBeNull();
   });
 
   test('language toggle button switches html lang', async ({ page }) => {
