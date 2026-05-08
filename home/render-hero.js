@@ -19,6 +19,10 @@ export function renderHero({ data }) {
     ${metaHtml}
     <hr class="rule" />
   `;
+
+  requestAnimationFrame(() => {
+    root.setAttribute('data-motion', 'entered');
+  });
 }
 
 function escapeHtml(value) {

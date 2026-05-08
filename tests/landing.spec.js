@@ -202,6 +202,34 @@ test.describe('footer', () => {
   });
 });
 
+test.describe('motion', () => {
+  test('hero applies entered state on first paint', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.hero[data-motion="entered"]')).toBeVisible({
+      timeout: 2000
+    });
+  });
+
+  test('reduced-motion disables hero entry transition', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await context.newPage();
+    await page.goto('/');
+    const transition = await page.locator('.hero-name').evaluate(
+      (el) => getComputedStyle(el).transitionDuration
+    );
+    expect(transition).toMatch(/^0s/);
+    await context.close();
+  });
+
+  test('focus-visible style on console input is vermilion', async ({ page }) => {
+    await page.goto('/');
+    const input = page.locator('#terminal-input');
+    await input.focus();
+    const outline = await input.evaluate((el) => getComputedStyle(el).outlineColor);
+    expect(outline).not.toBe('rgba(0, 0, 0, 0)');
+  });
+});
+
 test.describe('bilingual', () => {
   test('zh tagline renders without italic', async ({ page }) => {
     await page.goto('/');

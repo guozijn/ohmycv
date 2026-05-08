@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Hero entry stagger (name -> tagline -> meta) with 80/160ms offsets, 600ms `--ease-out`. Disabled under `prefers-reduced-motion`.
+- Global `:focus-visible` outline in vermilion across the page; explicit version on the console input.
 - Bilingual handling (`home/i18n.js`):
   - Persisted language preference in `localStorage` (`ohmycv:lang`).
   - CJK serif font (Noto Serif SC) lazy-loaded only on first Chinese activation.
