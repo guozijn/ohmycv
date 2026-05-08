@@ -99,3 +99,20 @@ test.describe('top bar', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   });
 });
+
+test.describe('hero', () => {
+  test('renders name, tagline, and meta line', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.hero-name')).toContainText(/[A-Za-z一-鿿]/);
+    await expect(page.locator('.hero-tagline')).toBeVisible();
+    await expect(page.locator('.hero-meta')).toBeVisible();
+  });
+
+  test('tagline reflects i18n homepage.tagline (English)', async ({ browser }) => {
+    const context = await browser.newContext({ locale: 'en-US' });
+    const page = await context.newPage();
+    await page.goto('/');
+    await expect(page.locator('.hero-tagline')).toContainText('thoughtful software');
+    await context.close();
+  });
+});

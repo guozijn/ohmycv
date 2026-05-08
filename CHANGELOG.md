@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Hero block (`home/render-hero.js`) with name (Geist 700 display), italic Fraunces tagline in vermilion, and a mono meta line. Sourced from `profile.name`, `homepage.tagline`, `homepage.meta`.
 - Top bar (`home/render-topbar.js`) with wordmark `~/zijian`, EN/ZH language toggle buttons, and a "&#x2193; CV" download link. Language buttons trigger a full re-render via the bootstrap.
 - New optional i18n fields for the editorial homepage: `homepage.tagline`, `homepage.meta`, `homepage.selected`, `homepage.colophon`, `profile.summary_emphasis`. Added with sample content in both `en.json` and `zh.json`.
 - Playwright smoke tests (`tests/landing.spec.js`) covering terminal render, greeting, command handling (`whoami`, `cv`), and locale-driven `html lang` attribute.

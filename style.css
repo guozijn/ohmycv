@@ -325,6 +325,51 @@
     transition: opacity var(--dur-fast) var(--ease-out);
   }
   .topbar-cv:hover { opacity: 0.78; }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(56px, 9vw, 120px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: 'opsz' 144;
+    font-size: clamp(28px, 4.5vw, 56px);
+    line-height: 1.05;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  .hero-meta {
+    font-family: var(--font-mono-editorial);
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 18px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .hero-meta-sep {
+    margin: 0 10px;
+  }
+
+  .hero .rule {
+    margin-top: 28px;
+  }
 }
 
 @layer console {
