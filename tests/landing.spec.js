@@ -114,7 +114,7 @@ test.describe('hero', () => {
     const context = await browser.newContext({ locale: 'en-US' });
     const page = await context.newPage();
     await page.goto('/');
-    await expect(page.locator('.hero-tagline')).toContainText('thoughtful software');
+    await expect(page.locator('.hero-tagline')).toContainText('stay hungry');
     await context.close();
   });
 });

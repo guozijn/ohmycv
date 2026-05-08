@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Favicon redesigned to match the editorial palette: ink ground (`#1a0f08`), vermilion `>_` glyph (`#ff4d2e`), thicker underscore as a solid rounded rect for legibility at 16x16 tab size. Replaces the green-on-black terminal favicon from the prior design.
+- Demo `homepage.tagline` changed from `building thoughtful software` to `stay hungry, stay foolish`. Chinese pairing uses the canonical literary rendering `求知若饥,虚心若愚`.
 - `home/render-selected.js` derives default cards from `experience.jobs[0]` plus the first two `open_source.custom_projects` entries when `homepage.selected` is not explicitly set. Removes the need to duplicate role/project content in the homepage block.
 - `home/render-hero.js` derives the meta line from `experience.jobs[0].location` (or the first non-email/phone/url contact value) plus `experience.jobs[0].title` when `homepage.meta` is not explicitly set.
 - Removed the demo `homepage.selected` and `homepage.meta` arrays from `i18n/en.json` and `i18n/zh.json`. Real content now flows from existing CV fields (which are populated by `config/local.json` for the actual user); demo i18n still drives the fake `Alex Chen` persona via the same fields.
