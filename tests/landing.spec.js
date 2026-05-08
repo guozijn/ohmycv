@@ -230,6 +230,18 @@ test.describe('motion', () => {
   });
 });
 
+test('mobile viewport keeps console visible without horizontal scroll', async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 375, height: 667 } });
+  const page = await context.newPage();
+  await page.goto('/');
+  await expect(page.locator('.console')).toBeVisible();
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth
+  );
+  expect(overflow).toBeLessThanOrEqual(1);
+  await context.close();
+});
+
 test.describe('bilingual', () => {
   test('zh tagline renders without italic', async ({ page }) => {
     await page.goto('/');

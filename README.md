@@ -19,6 +19,36 @@ Open:
 http://localhost:4173/
 ```
 
+## Tests
+
+```bash
+npm install
+npm run test:install   # one-time: download Chromium for Playwright
+npm test               # run smoke tests
+```
+
+The Playwright config in `playwright.config.js` automatically starts `python3 -m http.server 4173`.
+
+## Performance budget
+
+The landing page targets:
+
+- LCP <= 1.8s on simulated 4G (Moto G4) — verify periodically via Chrome DevTools Lighthouse.
+- CLS <= 0.05.
+- Initial transferred bytes <= 200 KB on English (Latin webfonts only) and <= 400 KB on Chinese (CJK weights are lazy-loaded on first language switch).
+
+## New i18n fields
+
+The redesigned homepage consumes these optional fields (see `i18n/en.json` and `i18n/zh.json`):
+
+| Field | Type | Description |
+|---|---|---|
+| `homepage.tagline` | string | Italicized accent below the name. |
+| `homepage.meta` | string[] | Mono meta line, joined with mono dots. |
+| `homepage.selected` | object[] | Selected work cards: `{ kind, meta, title, body, link: { label, href } }`. |
+| `homepage.colophon` | string | Single-line footer credit. |
+| `profile.summary_emphasis` | string | Substring of `profile.summary` to italicize for editorial rhythm. |
+
 ## Content files
 
 - `i18n/en.json`: English CV and homepage content.

@@ -106,7 +106,6 @@
     margin-bottom: var(--section-gap);
     border-bottom: 2px solid #333;
   }
-  .name { font-size: 28px; font-weight: bold; margin-bottom: 8px; }
   .contact-info {
     text-align: left;
     display: flex;
@@ -117,32 +116,6 @@
     white-space: nowrap;
     overflow-x: auto;
   }
-  #contact-info a {
-    color: var(--accent-color);
-    text-decoration: none;
-  }
-  #contact-info a:hover {
-    text-decoration: underline;
-    text-decoration-skip-ink: none;
-  }
-  .contact-item {
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-  .contact-item strong {
-    margin-right: 0.25rem;
-  }
-  .contact-divider {
-    display: inline-flex;
-    align-items: center;
-    margin: 0 0.6rem;
-    color: rgba(0, 0, 0, 0.45);
-    flex-shrink: 0;
-  }
-
-  .content { padding: 0; }
 
   .profile-summary {
     font-size: 14px;
@@ -167,13 +140,9 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
   .section-title:first-of-type { margin-top: 0; }
-  .content > *:not(.section-title) + .section-title { margin-top: var(--section-gap); }
   .job-title { font-weight: bold; font-style: italic; font-size: 14px; }
   .job-heading {
     align-items: flex-start;
-  }
-  .job-heading-main {
-    min-width: 0;
   }
   .institution {
     font-weight: bold;
@@ -192,10 +161,6 @@
     text-align: right;
   }
   .degree { font-style: italic; font-size: 14px; }
-  #experience-list > div + div {
-    margin-top: calc(var(--section-gap) * 0.65);
-  }
-  .small-text { font-size: 12px; color: #666; }
   .credential-id { margin-left: 8px;}
   .credential-desc { margin-left: 2px; margin-top: 2px; }
   .micro-note {
@@ -203,18 +168,6 @@
     font-style: italic;
     color: #555;
     margin-top: var(--block-gap);
-    line-height: var(--line-height-small);
-  }
-  .referee-entry { margin-bottom: 8px; font-size: 14px; }
-  .referee-name { font-weight: bold; }
-  .referee-meta {
-    font-style: italic;
-    font-size: 13px;
-    line-height: var(--line-height-list);
-  }
-  .referee-contact {
-    font-size: 12px;
-    color: #555;
     line-height: var(--line-height-small);
   }
   .referee-section {
@@ -917,55 +870,55 @@
 @layer utilities {
 }
 
-/* Mobile breakpoint kept outside layers for now; Task 15 will move it. */
-@media (max-width: 768px) {
-  :root {
-    --page-max-width: 100%;
-    --body-padding: 16px;
-  }
+@layer landing {
+  @media (max-width: 640px) {
+    :root {
+      --col: min(720px, 100% - 32px);
+      --gap-section: clamp(40px, 6vh, 72px);
+    }
 
-  .terminal-body {
-    padding: 18px;
-    min-height: calc(100vh - (var(--body-padding) * 2) - 45px);
+    .topbar-inner {
+      flex-wrap: wrap;
+      gap: 12px;
+      row-gap: 8px;
+    }
+
+    .hero-name {
+      font-size: clamp(40px, 12vw, 72px);
+    }
+
+    .hero-tagline {
+      font-size: clamp(22px, 7vw, 36px);
+    }
+
+    .hero-meta {
+      font-size: 12px;
+    }
+
+    .selected-title {
+      font-size: 20px;
+    }
+
+    .cv-list {
+      gap: 12px;
+    }
   }
-  .terminal-output {
-    max-height: none;
-  }
-  .terminal-name {
-    font-size: clamp(2.2rem, 16vw, 3.6rem);
-  }
-  .terminal-input-row {
-    align-items: center;
-    flex-direction: row;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  .terminal-prompt {
-    font-size: 16px;
-    white-space: nowrap;
-  }
-  .terminal-input,
-  .terminal-command,
-  .terminal-command-prompt,
-  .terminal-response,
-  .terminal-command-list,
-  .terminal-list-item {
-    font-size: 16px !important;
-    line-height: 1.5;
-  }
-  .name { font-size: 24px; }
-  .institution { font-size: 15px; }
-  .job-title, .degree, li, p { font-size: 13px; }
-  .contact-info {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 0.4rem 1rem;
-    white-space: normal;
-  }
-  .contact-divider {
-    display: none;
-  }
-  .home-link-btn {
-    display: none;
+}
+
+@layer console {
+  @media (max-width: 640px) {
+    .console {
+      min-height: clamp(220px, 50vh, 320px);
+    }
+    .console-body {
+      padding: 14px 16px 16px;
+    }
+    .terminal-output,
+    .terminal-input,
+    .terminal-prompt,
+    .terminal-command,
+    .terminal-response {
+      font-size: 15px;
+    }
   }
 }
