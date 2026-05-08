@@ -198,6 +198,23 @@ test.describe('footer', () => {
     await expect(page.locator('.elsewhere .contact-list a').first()).toBeVisible();
   });
 
+  test('address-like contact, when present, links to Google Maps', async ({ page }) => {
+    await page.goto('/');
+    const link = page.locator('.elsewhere .contact-list a[href*="google.com/maps"]');
+    if ((await link.count()) === 0) return;
+    const href = await link.first().getAttribute('href');
+    expect(href).toMatch(/^https:\/\/www\.google\.com\/maps\/search\/\?api=1&query=/);
+    expect(await link.first().getAttribute('target')).toBe('_blank');
+  });
+
+  test('external contact links open in a new tab', async ({ page }) => {
+    await page.goto('/');
+    const externals = page.locator('.elsewhere .contact-list a[href^="https://"]');
+    if ((await externals.count()) === 0) return;
+    const targets = await externals.evaluateAll((els) => els.map((el) => el.getAttribute('target')));
+    expect(targets.every((t) => t === '_blank')).toBe(true);
+  });
+
   test('footer does not duplicate the top-bar CV download link', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('.elsewhere .cv-list')).toHaveCount(0);

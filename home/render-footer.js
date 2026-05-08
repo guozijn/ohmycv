@@ -20,12 +20,17 @@ export function renderFooter({ data }) {
 function renderContact(label, value) {
   const href = toHref(label, value);
   if (!href) return `<li><span>${escapeHtml(value)}</span></li>`;
-  return `<li><a href="${escapeAttr(href)}">${escapeHtml(value)}</a></li>`;
+  const external = /^https?:\/\//i.test(href);
+  const attrs = external ? ' target="_blank" rel="noopener"' : '';
+  return `<li><a href="${escapeAttr(href)}"${attrs}>${escapeHtml(value)}</a></li>`;
 }
 
 function toHref(label, value) {
-  if (/^email$/i.test(label)) return `mailto:${value}`;
-  if (/^phone|^tel/i.test(label)) return `tel:${value}`;
+  if (/^email$|^邮箱$/i.test(label)) return `mailto:${value}`;
+  if (/^phone|^tel|^电话/i.test(label)) return `tel:${value}`;
+  if (/^address$|^location$|^地址$/i.test(label)) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value)}`;
+  }
   if (/^https?:\/\//i.test(value)) return value;
   if (/^mailto:|^tel:/i.test(value)) return value;
   return `https://${value}`;

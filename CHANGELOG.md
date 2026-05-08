@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Topbar wordmark and console chrome strip no longer hardcode `~/zijian`. Both derive the handle at runtime from `homepage.prompt` (extracts the part before `@` from a `<user>@<host>:...` pattern) via a new `getHandle(data)` helper exported from `home/config.js`. `index.html` now renders an empty `.console-chrome-id` placeholder filled by `initConsole`.
 - Document title prioritises `profile.name` over `homepage.title` and `site.title`, and the static `<title>` in `index.html` is empty so the tab no longer flashes "OhMyCV" on load before settling on the rendered name.
 
+- Footer contact links: address-like fields (label `Address`, `Location`, or `地址`) now link to a Google Maps search of the value (`https://www.google.com/maps/search/?api=1&query=<encoded>`). Email (`Email` / `邮箱`) and phone (`Phone` / `Tel` / `电话`) still resolve to `mailto:` and `tel:`. All `https://` links in the contact row open in a new tab (`target="_blank" rel="noopener"`); native `mailto:` / `tel:` keep no target.
+
 ### Removed
 
 - The entire `site` config block (`title`, `print_filename`, `download_label`). Document title now comes from `profile.name` only; `print_filename` moves to `homepage.print_filename`; `download_label` is removed (the topbar uses a hardcoded `CV` label). Migrated `i18n/en.json`, `i18n/zh.json`, `config/cv-jobs/software-engineer.json`, `config/local.example.json`, and the build script.
