@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('landing — baseline (current terminal homepage)', () => {
-  test('terminal renders with prompt input', async ({ page }) => {
+  test('console anchor renders with prompt input', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('.terminal-window')).toBeVisible();
+    await expect(page.locator('.console')).toBeVisible();
     await expect(page.locator('#terminal-input')).toBeVisible();
     await expect(page.locator('#terminal-prompt')).toBeVisible();
+    await expect(page.locator('.console-chrome-id')).toContainText('~/zijian');
   });
 
   test('terminal greeting renders', async ({ page }) => {

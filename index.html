@@ -13,7 +13,7 @@
   >
   <link rel="stylesheet" href="./style.css">
 </head>
-<body data-base-path=".">
+<body data-base-path="." class="landing-body">
   <div id="loader" class="loader" role="status" aria-live="polite">
     <div class="loader-terminal" aria-hidden="true">
       <span class="loader-logo">
@@ -24,19 +24,18 @@
     </div>
   </div>
 
-  <main class="terminal-shell">
-    <section class="terminal-window" aria-label="Terminal Home">
-      <div class="terminal-chrome">
-        <div class="terminal-dots" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+  <main class="landing">
+    <header class="topbar" id="topbar"></header>
+
+    <section class="hero" id="hero" aria-label="Introduction"></section>
+
+    <section class="console" id="console" aria-label="Interactive terminal">
+      <div class="console-chrome">
+        <span class="console-chrome-id">~/zijian — bash</span>
+        <span class="console-pulse" aria-hidden="true"></span>
       </div>
-
-      <div class="terminal-body">
+      <div class="console-body">
         <div class="terminal-output" id="terminal-output" aria-live="polite"></div>
-
         <form class="terminal-input-row" id="terminal-form" autocomplete="off">
           <label class="terminal-prompt" for="terminal-input" id="terminal-prompt">$</label>
           <input
@@ -52,6 +51,12 @@
         </form>
       </div>
     </section>
+
+    <section class="selected" id="selected" aria-label="Selected work"></section>
+
+    <section class="about" id="about" aria-label="About"></section>
+
+    <footer class="elsewhere" id="elsewhere" aria-label="Contact and downloads"></footer>
   </main>
 
   <script type="module" src="./home.js"></script>
