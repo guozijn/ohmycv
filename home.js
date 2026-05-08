@@ -1,5 +1,6 @@
 import { loadLang, loadCvConfig } from './home/config.js';
 import { initConsole } from './home/console.js';
+import { renderTopbar } from './home/render-topbar.js';
 
 function injectGoogleAnalytics(id) {
   if (!id || !/^G-[A-Z0-9]+$/i.test(id)) return;
@@ -23,27 +24,31 @@ function getPreferredLang() {
   return (navigator.language || 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en';
 }
 
-async function loadHome() {
+async function renderForLang(lang) {
   setLoading(true);
   try {
-    loadCvConfig().then(config => {
-      injectGoogleAnalytics(
-        config.local?.google_analytics_id ||
-        config.main?.google_analytics_id ||
-        config.shared?.google_analytics_id
-      );
-    });
-    const lang = getPreferredLang();
-    const dict = await loadLang(lang);
+    const data = await loadLang(lang);
     document.documentElement.lang = lang;
     document.body.setAttribute('lang', lang);
-    initConsole({ data: dict });
+    renderTopbar({ data, lang, onLanguageChange: (next) => renderForLang(next) });
+    initConsole({ data });
   } catch (err) {
     console.error(err);
     alert('Failed to load page content. Please refresh the page and try again.');
   } finally {
     setLoading(false);
   }
+}
+
+async function loadHome() {
+  loadCvConfig().then(config => {
+    injectGoogleAnalytics(
+      config.local?.google_analytics_id ||
+      config.main?.google_analytics_id ||
+      config.shared?.google_analytics_id
+    );
+  });
+  await renderForLang(getPreferredLang());
 }
 
 (function init() {

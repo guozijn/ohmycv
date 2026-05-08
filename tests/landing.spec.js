@@ -73,3 +73,29 @@ test.describe('landing — baseline (current terminal homepage)', () => {
     await context.close();
   });
 });
+
+test.describe('top bar', () => {
+  test('renders wordmark, language toggle, and CV link', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.topbar .wordmark')).toContainText('~/zijian');
+    await expect(page.locator('.topbar .lang-toggle')).toBeVisible();
+    await expect(page.locator('.topbar .topbar-cv')).toBeVisible();
+  });
+
+  test('CV link in top bar has an href', async ({ page }) => {
+    await page.goto('/');
+    const link = page.locator('.topbar .topbar-cv');
+    const href = await link.getAttribute('href');
+    expect(href).not.toBeNull();
+    // Either a real PDF path or '#' (no PDF available locally) — both valid.
+    expect(href).toMatch(/\.pdf$|^#$/);
+  });
+
+  test('language toggle button switches html lang', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('.lang-toggle [data-lang="zh"]').click();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'zh');
+    await page.locator('.lang-toggle [data-lang="en"]').click();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  });
+});

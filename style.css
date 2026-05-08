@@ -274,6 +274,57 @@
     border-top: 1px dashed var(--rule);
     margin: 0;
   }
+
+  .topbar-inner {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .wordmark {
+    font-family: var(--font-mono-editorial);
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .topbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono-editorial);
+    font-size: 13px;
+  }
+  .lang-toggle button {
+    background: none;
+    border: 0;
+    padding: 4px 6px;
+    color: var(--ink-soft);
+    font: inherit;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .lang-toggle button:hover { color: var(--ink); }
+  .lang-toggle button[aria-pressed="true"] { color: var(--accent); }
+  .lang-toggle-sep { color: var(--ink-soft); }
+
+  .topbar-cv {
+    font-family: var(--font-mono-editorial);
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+  .topbar-cv:hover { opacity: 0.78; }
 }
 
 @layer console {
