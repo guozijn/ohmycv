@@ -12,7 +12,7 @@ export function renderFooter({ data }) {
     <hr class="rule" />
     <span class="section-label">// get in touch</span>
     <ul class="contact-list" role="list">
-      ${contactItems.join('<span class="contact-sep" aria-hidden="true"> · </span>')}
+      ${contactItems.join('<span class="contact-sep" aria-hidden="true"> / </span>')}
     </ul>
   `;
 }

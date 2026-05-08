@@ -11,7 +11,7 @@ export function renderHero({ data }) {
   const metaHtml = meta.length
     ? `<p class="hero-meta">${meta
         .map(escapeHtml)
-        .join('<span class="hero-meta-sep" aria-hidden="true"> · </span>')}</p>`
+        .join('<span class="hero-meta-sep" aria-hidden="true"> / </span>')}</p>`
     : '';
 
   root.innerHTML = `

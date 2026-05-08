@@ -14,7 +14,7 @@ export function renderTopbar({ data, lang, onLanguageChange }) {
       <nav class="topbar-nav" aria-label="Site">
         <div class="lang-toggle" role="group" aria-label="Language">
           <button type="button" data-lang="en" aria-pressed="${lang === 'en'}">EN</button>
-          <span class="lang-toggle-sep" aria-hidden="true">·</span>
+          <span class="lang-toggle-sep" aria-hidden="true">/</span>
           <button type="button" data-lang="zh" aria-pressed="${lang === 'zh'}">ZH</button>
         </div>
         ${cvLink}
