@@ -8,7 +8,6 @@
     "title": "Alex Chen",
     "prompt": "alex@ohmycv:~$",
     "greeting": "输入 {help} 查看命令，或直接打开 {cv}、{github}、{linkedin}。",
-    "tagline": "求知若饥,虚心若愚",
     "links": [
       {
         "label": "作品集",

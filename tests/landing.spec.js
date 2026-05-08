@@ -103,19 +103,21 @@ test.describe('top bar', () => {
 });
 
 test.describe('hero', () => {
-  test('renders name, tagline, and meta line', async ({ page }) => {
+  test('renders name and meta line', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('.hero-name')).toContainText(/[A-Za-z一-鿿]/);
-    await expect(page.locator('.hero-tagline')).toBeVisible();
     await expect(page.locator('.hero-meta')).toBeVisible();
   });
 
-  test('tagline reflects i18n homepage.tagline (English)', async ({ browser }) => {
-    const context = await browser.newContext({ locale: 'en-US' });
-    const page = await context.newPage();
+  test('tagline, when configured, renders inside .hero-tagline', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('.hero-tagline')).toContainText('stay hungry');
-    await context.close();
+    const tagline = page.locator('.hero-tagline');
+    const count = await tagline.count();
+    if (count === 0) {
+      // No homepage.tagline configured in any merge layer — graceful absence.
+      return;
+    }
+    await expect(tagline).not.toBeEmpty();
   });
 });
 
@@ -241,23 +243,23 @@ test('mobile viewport keeps console visible without horizontal scroll', async ({
 });
 
 test.describe('bilingual', () => {
-  test('zh tagline renders without italic', async ({ page }) => {
+  test('zh tagline, when present, renders without italic', async ({ page }) => {
     await page.goto('/');
     await page.locator('.lang-toggle [data-lang="zh"]').click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'zh');
-    const fontStyle = await page.locator('.hero-tagline').evaluate(
-      (el) => getComputedStyle(el).fontStyle
-    );
+    const tagline = page.locator('.hero-tagline');
+    if ((await tagline.count()) === 0) return;
+    const fontStyle = await tagline.evaluate((el) => getComputedStyle(el).fontStyle);
     expect(fontStyle).toBe('normal');
   });
 
-  test('zh tagline uses CJK serif family', async ({ page }) => {
+  test('zh tagline, when present, uses CJK serif family', async ({ page }) => {
     await page.goto('/');
     await page.locator('.lang-toggle [data-lang="zh"]').click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'zh');
-    const family = await page.locator('.hero-tagline').evaluate(
-      (el) => getComputedStyle(el).fontFamily
-    );
+    const tagline = page.locator('.hero-tagline');
+    if ((await tagline.count()) === 0) return;
+    const family = await tagline.evaluate((el) => getComputedStyle(el).fontFamily);
     expect(family).toMatch(/Noto Serif SC|Source Han Serif|Songti/);
   });
 
