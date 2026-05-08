@@ -282,7 +282,7 @@
   .hero {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: clamp(12px, 1.4vw, 24px);
   }
 
   .hero-name {
