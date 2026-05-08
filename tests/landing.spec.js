@@ -116,3 +116,12 @@ test.describe('hero', () => {
     await context.close();
   });
 });
+
+test('Escape clears the console input line', async ({ page }) => {
+  await page.goto('/');
+  const input = page.locator('#terminal-input');
+  await input.click();
+  await input.fill('partial-command');
+  await input.press('Escape');
+  await expect(input).toHaveValue('');
+});

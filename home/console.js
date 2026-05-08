@@ -426,6 +426,13 @@ function attachHomeEvents() {
     });
 
     input.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        input.value = '';
+        resetTabCompletionState();
+        return;
+      }
+
       if (event.ctrlKey && !event.metaKey && !event.altKey) {
         if (event.key.toLowerCase() === 'u') {
           event.preventDefault();
