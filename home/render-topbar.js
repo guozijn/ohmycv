@@ -2,8 +2,11 @@ export function renderTopbar({ data, lang, onLanguageChange }) {
   const root = document.getElementById('topbar');
   if (!root) return;
 
-  const cvHref = data.__cv_pdf_href || '#';
+  const cvHref = data.__cv_pdf_href;
   const downloadLabel = data.site?.download_label || 'CV';
+  const cvLink = cvHref
+    ? `<a class="topbar-cv" href="${escapeAttr(cvHref)}" download aria-label="${escapeAttr(downloadLabel)}">&#x2193; CV</a>`
+    : '';
 
   root.innerHTML = `
     <div class="topbar-inner">
@@ -14,7 +17,7 @@ export function renderTopbar({ data, lang, onLanguageChange }) {
           <span class="lang-toggle-sep" aria-hidden="true">·</span>
           <button type="button" data-lang="zh" aria-pressed="${lang === 'zh'}">ZH</button>
         </div>
-        <a class="topbar-cv" href="${escapeAttr(cvHref)}" download aria-label="${escapeAttr(downloadLabel)}">&#x2193; CV</a>
+        ${cvLink}
       </nav>
     </div>
   `;

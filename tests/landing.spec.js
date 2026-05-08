@@ -75,20 +75,22 @@ test.describe('landing — baseline (current terminal homepage)', () => {
 });
 
 test.describe('top bar', () => {
-  test('renders wordmark, language toggle, and CV link', async ({ page }) => {
+  test('renders wordmark and language toggle', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('.topbar .wordmark')).toContainText('~/zijian');
     await expect(page.locator('.topbar .lang-toggle')).toBeVisible();
-    await expect(page.locator('.topbar .topbar-cv')).toBeVisible();
   });
 
-  test('CV link in top bar has an href', async ({ page }) => {
+  test('CV link, if present, points to a real PDF', async ({ page }) => {
     await page.goto('/');
     const link = page.locator('.topbar .topbar-cv');
+    const count = await link.count();
+    if (count === 0) {
+      // No PDF resolved for the active job — link is correctly omitted.
+      return;
+    }
     const href = await link.getAttribute('href');
-    expect(href).not.toBeNull();
-    // Either a real PDF path or '#' (no PDF available locally) — both valid.
-    expect(href).toMatch(/\.pdf$|^#$/);
+    expect(href).toMatch(/\.pdf$/);
   });
 
   test('language toggle button switches html lang', async ({ page }) => {
@@ -190,21 +192,10 @@ test.describe('footer', () => {
     await expect(page.locator('.elsewhere .contact-list a').first()).toBeVisible();
   });
 
-  test('renders CV download links structure for both languages when available', async ({ page }) => {
+  test('footer does not duplicate the top-bar CV download link', async ({ page }) => {
     await page.goto('/');
-    // CV links may not resolve to real PDFs in this environment — but if hrefs
-    // are present, both en and zh entries should be in the markup.
-    const list = page.locator('.elsewhere .cv-list');
-    await expect(list).toBeVisible();
-    // Each rendered item should be a .cv-link with a data-lang attribute.
-    const links = list.locator('.cv-link');
-    const count = await links.count();
-    if (count > 0) {
-      const langs = await links.evaluateAll((els) =>
-        els.map((el) => el.getAttribute('data-lang'))
-      );
-      expect(langs.every((l) => l === 'en' || l === 'zh')).toBe(true);
-    }
+    await expect(page.locator('.elsewhere .cv-list')).toHaveCount(0);
+    await expect(page.locator('.elsewhere .cv-link')).toHaveCount(0);
   });
 
   test('colophon line rendered', async ({ page }) => {

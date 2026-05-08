@@ -4,23 +4,10 @@ export function renderFooter({ data }) {
 
   const contact = data.profile?.contact_info || {};
   const colophon = data.homepage?.colophon || '';
-  const cvHrefs = data.__cv_pdf_hrefs || {};
 
   const contactItems = Object.entries(contact)
     .filter(([, value]) => Boolean(value))
     .map(([label, value]) => renderContact(label, value));
-
-  const cvItems = [];
-  if (cvHrefs.en) {
-    cvItems.push(
-      `<li><a class="cv-link" data-lang="en" href="${escapeAttr(cvHrefs.en)}" download>↓ cv · en</a></li>`
-    );
-  }
-  if (cvHrefs.zh) {
-    cvItems.push(
-      `<li><a class="cv-link" data-lang="zh" href="${escapeAttr(cvHrefs.zh)}" download>↓ cv · zh</a></li>`
-    );
-  }
 
   root.innerHTML = `
     <hr class="rule" />
@@ -28,7 +15,6 @@ export function renderFooter({ data }) {
     <ul class="contact-list" role="list">
       ${contactItems.join('<span class="contact-sep" aria-hidden="true"> · </span>')}
     </ul>
-    <ul class="cv-list" role="list">${cvItems.join('')}</ul>
     ${colophon ? `<p class="colophon">${escapeHtml(colophon)}</p>` : ''}
   `;
 }
