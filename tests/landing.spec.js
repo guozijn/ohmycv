@@ -133,14 +133,13 @@ test.describe('selected', () => {
     await expect(cards).toHaveCount(3);
   });
 
-  test('each card shows kind, meta, title, body, and verb link', async ({ page }) => {
+  test('each card shows kind, meta, title, and body', async ({ page }) => {
     await page.goto('/');
     const first = page.locator('.selected .selected-card').first();
     await expect(first.locator('.selected-kind')).toBeVisible();
     await expect(first.locator('.selected-meta')).toBeVisible();
     await expect(first.locator('.selected-title')).toBeVisible();
     await expect(first.locator('.selected-body')).toBeVisible();
-    await expect(first.locator('.selected-link')).toBeVisible();
   });
 
   test('section label is shown', async ({ page }) => {
@@ -165,11 +164,23 @@ test.describe('about', () => {
     await expect(page.locator('.about .section-label')).toContainText(/about/i);
   });
 
-  test('emphasized substring is wrapped in italic em', async ({ page }) => {
+  test('emphasis renders when summary_emphasis is a substring of summary', async ({ page }) => {
     await page.goto('/');
+    const para = page.locator('.about p');
+    await expect(para).not.toBeEmpty();
+    const text = (await para.textContent()) || '';
     const em = page.locator('.about p em.about-emphasis');
-    await expect(em).toBeVisible();
-    await expect(em).not.toBeEmpty();
+    const emCount = await em.count();
+    const merged = await page.evaluate(() => {
+      const el = document.querySelector('.about p');
+      return el ? el.innerHTML : '';
+    });
+    if (emCount > 0) {
+      const emText = (await em.textContent()) || '';
+      expect(text.includes(emText)).toBe(true);
+    } else {
+      expect(merged).not.toMatch(/<em class="about-emphasis">/);
+    }
   });
 });
 

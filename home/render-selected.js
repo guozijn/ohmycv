@@ -2,7 +2,8 @@ export function renderSelected({ data }) {
   const root = document.getElementById('selected');
   if (!root) return;
 
-  const items = Array.isArray(data.homepage?.selected) ? data.homepage.selected : [];
+  const explicit = Array.isArray(data.homepage?.selected) ? data.homepage.selected : null;
+  const items = explicit && explicit.length > 0 ? explicit : deriveFromExisting(data);
   if (items.length === 0) {
     root.innerHTML = '';
     return;
@@ -57,6 +58,35 @@ function observeReveals(elements) {
     { threshold: 0.2 }
   );
   elements.forEach((el) => io.observe(el));
+}
+
+function deriveFromExisting(data) {
+  const cards = [];
+  const job = data.experience?.jobs?.[0];
+  if (job) {
+    const role = job.title || '';
+    const lead = Array.isArray(job.responsibilities) ? job.responsibilities[0] : '';
+    const body = role && lead ? `${role}. ${lead}` : lead || role;
+    cards.push({
+      kind: 'role',
+      meta: job.dates || '',
+      title: job.company || '',
+      body
+    });
+  }
+  const projects = Array.isArray(data.open_source?.custom_projects)
+    ? data.open_source.custom_projects
+    : [];
+  const projectMeta = data.open_source?.custom || 'project';
+  for (const p of projects.slice(0, 2)) {
+    cards.push({
+      kind: 'project',
+      meta: projectMeta,
+      title: p.title || '',
+      body: p.desc || ''
+    });
+  }
+  return cards;
 }
 
 function isExternal(href) {

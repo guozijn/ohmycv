@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed
+
+- `home/render-selected.js` derives default cards from `experience.jobs[0]` plus the first two `open_source.custom_projects` entries when `homepage.selected` is not explicitly set. Removes the need to duplicate role/project content in the homepage block.
+- `home/render-hero.js` derives the meta line from `experience.jobs[0].location` (or the first non-email/phone/url contact value) plus `experience.jobs[0].title` when `homepage.meta` is not explicitly set.
+- Removed the demo `homepage.selected` and `homepage.meta` arrays from `i18n/en.json` and `i18n/zh.json`. Real content now flows from existing CV fields (which are populated by `config/local.json` for the actual user); demo i18n still drives the fake `Alex Chen` persona via the same fields.
+
 ## [0.1.0] - 2026-05-08
 
 ### Added
