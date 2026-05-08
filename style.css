@@ -29,6 +29,29 @@
     --terminal-muted: #78b88d;
     --terminal-accent: #5cff9b;
     --terminal-danger: #ff7c7c;
+
+    /* Vermilion · Editorial palette */
+    --paper: #f1ece4;
+    --ink: #1a0f08;
+    --accent: #ff4d2e;
+    --ink-soft: color-mix(in srgb, var(--ink) 65%, transparent);
+    --rule: color-mix(in srgb, var(--ink) 18%, transparent);
+
+    /* Editorial type stack */
+    --font-display: 'Geist', system-ui, -apple-system, sans-serif;
+    --font-italic: 'Fraunces', 'Source Han Serif SC', 'Noto Serif SC', 'Songti SC', serif;
+    --font-mono-editorial: 'Geist Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+    /* Editorial layout */
+    --col: min(720px, 100% - 48px);
+    --gap-section: clamp(48px, 7vh, 96px);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --dur-fast: 160ms;
+    --dur-base: 200ms;
+    --dur-medium: 500ms;
+    --dur-slow: 600ms;
   }
 }
 
