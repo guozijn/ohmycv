@@ -5,6 +5,11 @@ import { renderHero } from './home/render-hero.js';
 import { renderSelected } from './home/render-selected.js';
 import { renderAbout } from './home/render-about.js';
 import { renderFooter } from './home/render-footer.js';
+import {
+  readPersistedLang,
+  persistLang,
+  applyLangAttribute
+} from './home/i18n.js';
 
 function injectGoogleAnalytics(id) {
   if (!id || !/^G-[A-Z0-9]+$/i.test(id)) return;
@@ -24,16 +29,17 @@ function setLoading(isLoading) {
   loader.setAttribute('aria-hidden', String(!isLoading));
 }
 
-function getPreferredLang() {
-  return (navigator.language || 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en';
+function getPreferredLangFromNavigator() {
+  const lang = (navigator.language || 'en').toLowerCase();
+  return lang.startsWith('zh') ? 'zh' : 'en';
 }
 
 async function renderForLang(lang) {
   setLoading(true);
   try {
     const data = await loadLang(lang);
-    document.documentElement.lang = lang;
-    document.body.setAttribute('lang', lang);
+    applyLangAttribute(lang);
+    persistLang(lang);
     renderTopbar({ data, lang, onLanguageChange: (next) => renderForLang(next) });
     renderHero({ data });
     renderSelected({ data });
@@ -56,7 +62,7 @@ async function loadHome() {
       config.shared?.google_analytics_id
     );
   });
-  await renderForLang(getPreferredLang());
+  await renderForLang(readPersistedLang(getPreferredLangFromNavigator()));
 }
 
 (function init() {

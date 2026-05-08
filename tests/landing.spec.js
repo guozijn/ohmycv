@@ -201,3 +201,40 @@ test.describe('footer', () => {
     await expect(page.locator('.elsewhere .colophon')).toBeVisible();
   });
 });
+
+test.describe('bilingual', () => {
+  test('zh tagline renders without italic', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('.lang-toggle [data-lang="zh"]').click();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'zh');
+    const fontStyle = await page.locator('.hero-tagline').evaluate(
+      (el) => getComputedStyle(el).fontStyle
+    );
+    expect(fontStyle).toBe('normal');
+  });
+
+  test('zh tagline uses CJK serif family', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('.lang-toggle [data-lang="zh"]').click();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'zh');
+    const family = await page.locator('.hero-tagline').evaluate(
+      (el) => getComputedStyle(el).fontFamily
+    );
+    expect(family).toMatch(/Noto Serif SC|Source Han Serif|Songti/);
+  });
+
+  test('CJK font CSS link is injected after zh switch', async ({ page }) => {
+    await page.goto('/');
+    expect(await page.locator('link[data-cjk]').count()).toBe(0);
+    await page.locator('.lang-toggle [data-lang="zh"]').click();
+    await expect(page.locator('link[data-cjk]')).toHaveCount(1);
+  });
+
+  test('language preference persists across reloads', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('.lang-toggle [data-lang="zh"]').click();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'zh');
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'zh');
+  });
+});

@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Bilingual handling (`home/i18n.js`):
+  - Persisted language preference in `localStorage` (`ohmycv:lang`).
+  - CJK serif font (Noto Serif SC) lazy-loaded only on first Chinese activation.
+  - `:lang(zh)` overrides on `.hero-tagline`, `.hero-name`, and `.about-emphasis` swap from Fraunces italic to Noto Serif SC weight 300 in vermilion (no italic — Chinese typography has no italic equivalent).
 - About paragraph (`home/render-about.js`) drawn from `profile.summary`. If `profile.summary_emphasis` is a substring of the summary, the renderer wraps it in an italic Fraunces vermilion `<em class="about-emphasis">`.
 - Footer (`home/render-footer.js`) with contact list (mono, dot-separated), dual-language CV download links (rendered when `__cv_pdf_hrefs.en` / `.zh` are populated), and a colophon line.
 - Selected work section (`home/render-selected.js`): editorial cards rendered from `homepage.selected`, separated by 1px dashed top rules. IntersectionObserver-driven fade+rise reveal on scroll; reduced-motion shows cards immediately. Title hover transitions to vermilion; verb-link hover grows an underline.
