@@ -149,3 +149,5 @@ vite.config.ts.timestamp-*
 config/local.json
 .playwright-cli/
 .superpowers/
+test-results/
+playwright-report/
