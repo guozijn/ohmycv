@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `home/render-hero.js` derives the meta line from `experience.jobs[0].location` (or the first non-email/phone/url contact value) plus `experience.jobs[0].title` when `homepage.meta` is not explicitly set.
 - Removed the demo `homepage.selected` and `homepage.meta` arrays from `i18n/en.json` and `i18n/zh.json`. Real content now flows from existing CV fields (which are populated by `config/local.json` for the actual user); demo i18n still drives the fake `Alex Chen` persona via the same fields.
 - Top-bar `↓ CV` link is no longer rendered when no PDF resolves for the active job — previously it pointed at `#`, which made `download` save the current page as HTML.
+- Footer section label changed from `// elsewhere` to `// get in touch`. Section id and CSS class (`#elsewhere`, `.elsewhere`) are unchanged.
 
 ### Removed
 

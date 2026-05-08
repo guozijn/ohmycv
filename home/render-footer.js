@@ -11,7 +11,7 @@ export function renderFooter({ data }) {
 
   root.innerHTML = `
     <hr class="rule" />
-    <span class="section-label">// elsewhere</span>
+    <span class="section-label">// get in touch</span>
     <ul class="contact-list" role="list">
       ${contactItems.join('<span class="contact-sep" aria-hidden="true"> · </span>')}
     </ul>
