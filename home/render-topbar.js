@@ -1,3 +1,5 @@
+import { getHandle } from './config.js';
+
 export function renderTopbar({ data, lang, onLanguageChange }) {
   const root = document.getElementById('topbar');
   if (!root) return;
@@ -7,10 +9,11 @@ export function renderTopbar({ data, lang, onLanguageChange }) {
   const cvLink = cvHref
     ? `<a class="topbar-cv" href="${escapeAttr(cvHref)}" target="_blank" rel="noopener" aria-label="${escapeAttr(cvLabel)}">CV &#x2197;</a>`
     : '';
+  const handle = getHandle(data);
 
   root.innerHTML = `
     <div class="topbar-inner">
-      <a class="wordmark" href="/" aria-label="Home">~/zijian</a>
+      <a class="wordmark" href="/" aria-label="Home">~/${escapeAttr(handle)}</a>
       <nav class="topbar-nav" aria-label="Site">
         <div class="lang-toggle" role="group" aria-label="Language">
           <button type="button" data-lang="en" aria-pressed="${lang === 'en'}">EN</button>

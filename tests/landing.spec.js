@@ -6,7 +6,7 @@ test.describe('landing — baseline (current terminal homepage)', () => {
     await expect(page.locator('.console')).toBeVisible();
     await expect(page.locator('#terminal-input')).toBeVisible();
     await expect(page.locator('#terminal-prompt')).toBeVisible();
-    await expect(page.locator('.console-chrome-id')).toContainText('~/zijian');
+    await expect(page.locator('.console-chrome-id')).toHaveText(/^~\/[a-z][a-z0-9_-]*\s+—\s+bash$/);
   });
 
   test('terminal greeting renders', async ({ page }) => {
@@ -77,7 +77,7 @@ test.describe('landing — baseline (current terminal homepage)', () => {
 test.describe('top bar', () => {
   test('renders wordmark and language toggle', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('.topbar .wordmark')).toContainText('~/zijian');
+    await expect(page.locator('.topbar .wordmark')).toHaveText(/^~\/[a-z][a-z0-9_-]*$/);
     await expect(page.locator('.topbar .lang-toggle')).toBeVisible();
   });
 

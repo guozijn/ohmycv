@@ -24,6 +24,12 @@ export function toAbsoluteUrl(value) {
   }
 }
 
+export function getHandle(data) {
+  const prompt = typeof data?.homepage?.prompt === 'string' ? data.homepage.prompt : '';
+  const match = prompt.match(/^([A-Za-z][A-Za-z0-9_-]*)@/);
+  return match ? match[1] : 'home';
+}
+
 export async function loadLang(lang) {
   const path = withBasePath(`i18n/${lang}.json`);
   const [res, config, manifest] = await Promise.all([

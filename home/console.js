@@ -1,4 +1,4 @@
-import { toAbsoluteUrl } from './config.js';
+import { toAbsoluteUrl, getHandle } from './config.js';
 
 function normaliseUrl(value) {
   if (!value) return '';
@@ -550,11 +550,15 @@ function attachHomeEvents() {
 export function initConsole({ data }) {
   homeState = createTerminalState(data);
 
-  document.title = data.homepage?.title || data.site?.title || data.profile?.name || 'OhMyCV';
+  const titleSource = data.profile?.name || data.homepage?.title || data.site?.title;
+  if (titleSource) document.title = titleSource;
   document.body.classList.add('terminal-home');
 
   const promptEl = document.getElementById('terminal-prompt');
   if (promptEl) promptEl.textContent = getUIStrings(data).prompt;
+
+  const chromeIdEl = document.querySelector('.console-chrome-id');
+  if (chromeIdEl) chromeIdEl.textContent = `~/${getHandle(data)} — bash`;
 
   commandHistory = [];
   historyIndex = -1;
