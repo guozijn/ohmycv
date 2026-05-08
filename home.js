@@ -3,6 +3,8 @@ import { initConsole } from './home/console.js';
 import { renderTopbar } from './home/render-topbar.js';
 import { renderHero } from './home/render-hero.js';
 import { renderSelected } from './home/render-selected.js';
+import { renderAbout } from './home/render-about.js';
+import { renderFooter } from './home/render-footer.js';
 
 function injectGoogleAnalytics(id) {
   if (!id || !/^G-[A-Z0-9]+$/i.test(id)) return;
@@ -35,6 +37,8 @@ async function renderForLang(lang) {
     renderTopbar({ data, lang, onLanguageChange: (next) => renderForLang(next) });
     renderHero({ data });
     renderSelected({ data });
+    renderAbout({ data });
+    renderFooter({ data });
     initConsole({ data });
   } catch (err) {
     console.error(err);

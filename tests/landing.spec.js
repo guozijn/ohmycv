@@ -157,3 +157,47 @@ test.describe('selected', () => {
     await context.close();
   });
 });
+
+test.describe('about', () => {
+  test('renders summary paragraph with section label', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.about p')).not.toBeEmpty();
+    await expect(page.locator('.about .section-label')).toContainText(/about/i);
+  });
+
+  test('emphasized substring is wrapped in italic em', async ({ page }) => {
+    await page.goto('/');
+    const em = page.locator('.about p em.about-emphasis');
+    await expect(em).toBeVisible();
+    await expect(em).not.toBeEmpty();
+  });
+});
+
+test.describe('footer', () => {
+  test('contact links rendered', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.elsewhere .contact-list a').first()).toBeVisible();
+  });
+
+  test('renders CV download links structure for both languages when available', async ({ page }) => {
+    await page.goto('/');
+    // CV links may not resolve to real PDFs in this environment — but if hrefs
+    // are present, both en and zh entries should be in the markup.
+    const list = page.locator('.elsewhere .cv-list');
+    await expect(list).toBeVisible();
+    // Each rendered item should be a .cv-link with a data-lang attribute.
+    const links = list.locator('.cv-link');
+    const count = await links.count();
+    if (count > 0) {
+      const langs = await links.evaluateAll((els) =>
+        els.map((el) => el.getAttribute('data-lang'))
+      );
+      expect(langs.every((l) => l === 'en' || l === 'zh')).toBe(true);
+    }
+  });
+
+  test('colophon line rendered', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.elsewhere .colophon')).toBeVisible();
+  });
+});

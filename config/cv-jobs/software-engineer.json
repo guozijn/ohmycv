@@ -5,7 +5,8 @@
         "print_filename": "Alex-Chen-Software-Engineer-CV"
       },
       "profile": {
-        "summary": "Software engineer focused on full-stack product development, data workflows, and reliable delivery. Experienced in React, Node.js, Python, cloud deployment, automation, and cross-functional product work."
+        "summary": "Software engineer focused on full-stack product development, data workflows, and reliable delivery. Experienced in React, Node.js, Python, cloud deployment, automation, and cross-functional product work.",
+        "summary_emphasis": "reliable delivery"
       },
       "skills": {
         "title": "SOFTWARE ENGINEERING SKILLS",
@@ -22,7 +23,8 @@
         "print_filename": "Alex-Chen-Software-Engineer-CV"
       },
       "profile": {
-        "summary": "专注全栈产品开发、数据流程与可靠交付的软件工程师。具备 React、Node.js、Python、云部署、自动化和跨职能产品协作经验。"
+        "summary": "专注全栈产品开发、数据流程与可靠交付的软件工程师。具备 React、Node.js、Python、云部署、自动化和跨职能产品协作经验。",
+        "summary_emphasis": "可靠交付"
       },
       "skills": {
         "title": "软件工程技能",

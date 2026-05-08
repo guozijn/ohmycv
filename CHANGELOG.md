@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- About paragraph (`home/render-about.js`) drawn from `profile.summary`. If `profile.summary_emphasis` is a substring of the summary, the renderer wraps it in an italic Fraunces vermilion `<em class="about-emphasis">`.
+- Footer (`home/render-footer.js`) with contact list (mono, dot-separated), dual-language CV download links (rendered when `__cv_pdf_hrefs.en` / `.zh` are populated), and a colophon line.
 - Selected work section (`home/render-selected.js`): editorial cards rendered from `homepage.selected`, separated by 1px dashed top rules. IntersectionObserver-driven fade+rise reveal on scroll; reduced-motion shows cards immediately. Title hover transitions to vermilion; verb-link hover grows an underline.
 - Console live-pulse breathing animation (2.4s, vermilion). Disabled under `prefers-reduced-motion`.
 - Escape key clears the current console input line.
