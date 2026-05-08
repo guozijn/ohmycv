@@ -2,7 +2,7 @@ export function renderHero({ data }) {
   const root = document.getElementById('hero');
   if (!root) return;
 
-  const name = data.profile?.name ?? data.site?.title ?? '';
+  const name = data.profile?.name ?? '';
   const tagline = data.homepage?.tagline ?? '';
   const explicitMeta = Array.isArray(data.homepage?.meta) ? data.homepage.meta : null;
   const meta = explicitMeta && explicitMeta.length > 0 ? explicitMeta : deriveMeta(data);

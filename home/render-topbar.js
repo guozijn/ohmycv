@@ -5,9 +5,8 @@ export function renderTopbar({ data, lang, onLanguageChange }) {
   if (!root) return;
 
   const cvHref = data.__cv_pdf_href;
-  const cvLabel = data.site?.cv_label || 'CV';
   const cvLink = cvHref
-    ? `<a class="topbar-cv" href="${escapeAttr(cvHref)}" target="_blank" rel="noopener" aria-label="${escapeAttr(cvLabel)}">CV &#x2197;</a>`
+    ? `<a class="topbar-cv" href="${escapeAttr(cvHref)}" target="_blank" rel="noopener" aria-label="CV">CV &#x2197;</a>`
     : '';
   const handle = getHandle(data);
 

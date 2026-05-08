@@ -550,8 +550,7 @@ function attachHomeEvents() {
 export function initConsole({ data }) {
   homeState = createTerminalState(data);
 
-  const titleSource = data.profile?.name || data.homepage?.title || data.site?.title;
-  if (titleSource) document.title = titleSource;
+  if (data.profile?.name) document.title = data.profile.name;
   document.body.classList.add('terminal-home');
 
   const promptEl = document.getElementById('terminal-prompt');

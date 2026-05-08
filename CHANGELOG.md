@@ -12,6 +12,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `homepage.tagline` removed from `i18n/en.json` and `i18n/zh.json`. The field is still consumed by the hero renderer but is now expected to come from a config layer (`cv.json`, `cv-jobs/<job>.json`, or private `config/local.json`) rather than the i18n demo base. Hero degrades gracefully when no tagline is configured.
 - Topbar wordmark and console chrome strip no longer hardcode `~/zijian`. Both derive the handle at runtime from `homepage.prompt` (extracts the part before `@` from a `<user>@<host>:...` pattern) via a new `getHandle(data)` helper exported from `home/config.js`. `index.html` now renders an empty `.console-chrome-id` placeholder filled by `initConsole`.
 - Document title prioritises `profile.name` over `homepage.title` and `site.title`, and the static `<title>` in `index.html` is empty so the tab no longer flashes "OhMyCV" on load before settling on the rendered name.
+
+### Removed
+
+- The entire `site` config block (`title`, `print_filename`, `download_label`). Document title now comes from `profile.name` only; `print_filename` moves to `homepage.print_filename`; `download_label` is removed (the topbar uses a hardcoded `CV` label). Migrated `i18n/en.json`, `i18n/zh.json`, `config/cv-jobs/software-engineer.json`, `config/local.example.json`, and the build script.
+- `homepage.title` field. It duplicated `profile.name` and is now sourced from `profile.name` exclusively for the document title.
+
+### Docs
+
+- README adds a `Building the CV PDF` section documenting the XeTeX prerequisite (TeX Live / MacTeX / MiKTeX with `xelatex`, `xeCJK`, and CJK fonts), per-platform install commands, and a verification step.
+- README `i18n fields` table rewritten to reflect the consolidated schema (no `site` block, no `homepage.title`, derivation rules for `homepage.meta` and `homepage.selected`).
 - Separator characters in the hero meta line, topbar language toggle, and footer contact list changed from middle-dot `·` to forward-slash `/`. Aligns with the URL-segment feel of the wordmark `~/zijian` and the mono-friendly editorial aesthetic.
 - `home/render-selected.js` derives default cards from `experience.jobs[0]` plus the first two `open_source.custom_projects` entries when `homepage.selected` is not explicitly set. Removes the need to duplicate role/project content in the homepage block.
 - `home/render-hero.js` derives the meta line from `experience.jobs[0].location` (or the first non-email/phone/url contact value) plus `experience.jobs[0].title` when `homepage.meta` is not explicitly set.

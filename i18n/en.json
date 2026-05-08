@@ -1,11 +1,6 @@
 {
-  "site": {
-    "title": "Alex Chen",
-    "print_filename": "Alex-Chen-CV",
-    "download_label": "Download PDF"
-  },
   "homepage": {
-    "title": "Alex Chen",
+    "print_filename": "Alex-Chen-CV",
     "prompt": "alex@ohmycv:~$",
     "greeting": "Type {help} to see commands, or jump straight to {cv}, {github}, or {linkedin}.",
     "links": [

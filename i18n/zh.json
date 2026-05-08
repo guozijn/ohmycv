@@ -1,11 +1,6 @@
 {
-  "site": {
-    "title": "陈安",
-    "print_filename": "Alex-Chen-CV",
-    "download_label": "下载 PDF"
-  },
   "homepage": {
-    "title": "Alex Chen",
+    "print_filename": "Alex-Chen-CV",
     "prompt": "alex@ohmycv:~$",
     "greeting": "输入 {help} 查看命令，或直接打开 {cv}、{github}、{linkedin}。",
     "links": [
