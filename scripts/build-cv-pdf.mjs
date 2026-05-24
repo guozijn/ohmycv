@@ -193,12 +193,16 @@ function renderLatex(data, lang) {
 \usepackage{array}
 \usepackage{needspace}
 \usepackage{ifthen}
-\IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{
-  \IfFontExistsTF{Liberation Serif}{\setmainfont{Liberation Serif}}{}
+\IfFontExistsTF{Inter}{\setmainfont{Inter}}{
+  \IfFontExistsTF{Arial}{\setmainfont{Arial}}{
+    \IfFontExistsTF{TeX Gyre Heros}{\setmainfont{TeX Gyre Heros}}{\setmainfont{Liberation Sans}}
+  }
 }
-\IfFontExistsTF{Noto Serif CJK SC}{\setCJKmainfont{Noto Serif CJK SC}}{
-  \IfFontExistsTF{Songti SC}{\setCJKmainfont{Songti SC}}{
-    \IfFontExistsTF{SimSun}{\setCJKmainfont{SimSun}}{\setCJKmainfont{AR PL UMing CN}}
+\IfFontExistsTF{Source Han Sans SC}{\setCJKmainfont{Source Han Sans SC}}{
+  \IfFontExistsTF{Noto Sans CJK SC}{\setCJKmainfont{Noto Sans CJK SC}}{
+    \IfFontExistsTF{PingFang SC}{\setCJKmainfont{PingFang SC}}{
+      \IfFontExistsTF{Microsoft YaHei}{\setCJKmainfont{Microsoft YaHei}}{\setCJKmainfont{AR PL UKai CN}}
+    }
   }
 }
 \definecolor{accent}{HTML}{0070C9}

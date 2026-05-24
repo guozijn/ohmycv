@@ -1,5 +1,5 @@
 const CJK_HREF =
-  'https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&display=swap';
+  'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@300;400;700&display=swap';
 const STORAGE_KEY = 'ohmycv:lang';
 
 export function readPersistedLang(fallback = 'en') {

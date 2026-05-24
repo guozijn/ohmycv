@@ -34,7 +34,7 @@ Verify the toolchain is reachable:
 xelatex --version
 ```
 
-If `xelatex` is not on `PATH`, the build script will fail at the first job target. The Chinese CV needs CJK fonts — `xeCJK` plus a serif/sans CJK font (Source Han Serif/Sans, Noto Serif/Sans CJK, or system fallbacks) — otherwise the zh build produces blank glyphs.
+If `xelatex` is not on `PATH`, the build script will fail at the first job target. The CV uses Inter for Latin text and Source Han Sans SC / 思源黑体 for Chinese where available. The Chinese CV needs CJK fonts — `xeCJK` plus a sans CJK font (Source Han Sans SC, Noto Sans CJK SC, PingFang SC, Microsoft YaHei, or system fallbacks) — otherwise the zh build produces blank glyphs.
 
 The compiled PDFs are written to `cv/generated/` (gitignored) along with a `manifest.json` consumed by the homepage to resolve the top-bar `CV ↗` link to the right file per language.
 

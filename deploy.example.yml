@@ -40,11 +40,30 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
+            curl \
+            fontconfig \
+            unzip \
             texlive-xetex \
             texlive-latex-extra \
             texlive-fonts-recommended \
             texlive-lang-chinese \
+            fonts-inter \
             fonts-noto-cjk
+
+      - name: Install Source Han Sans SC font
+        run: |
+          curl -fsSL \
+            https://github.com/adobe-fonts/source-han-sans/releases/download/2.005R/09_SourceHanSansSC.zip \
+            -o /tmp/source-han-sans-sc.zip
+          mkdir -p /tmp/source-han-sans-sc
+          unzip -q /tmp/source-han-sans-sc.zip '*.otf' -d /tmp/source-han-sans-sc
+          sudo mkdir -p /usr/local/share/fonts/source-han-sans-sc
+          sudo find /tmp/source-han-sans-sc -type f -name '*.otf' \
+            -exec install -m 0644 {} /usr/local/share/fonts/source-han-sans-sc/ \;
+          fc-cache -f
+          fc-match "Inter"
+          fc-match "Source Han Sans SC"
+          fc-match "思源黑体 SC"
 
       - name: Build LaTeX CV PDFs
         run: node scripts/build-cv-pdf.mjs
